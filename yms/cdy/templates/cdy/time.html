@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <th>order</th>
+    <th>Time</th>
+    <br>
+    {% for x in k %}
+    <td>{{x.od}}</td>
+    <td>{{x.dt.date}} {{x.dt.hour}}:{{x.dt.minute}}:{{x.dt.second}}</td>
+   
+    <br>
+    {% endfor %}
+</body>
+</html>

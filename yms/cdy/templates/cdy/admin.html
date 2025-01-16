@@ -1,0 +1,2534 @@
+<!--how to keep drop menu fixed by changing thew contents -->
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <style>
+      
+      .bnt{
+        margin-top:20px;
+      }
+      .bnt button{
+        padding:10px 10px;
+      }
+          table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+          }
+          
+          td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+          }
+          
+   
+        </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drop down menu</title>
+    <style>
+    *    /**/
+      {
+          padding:0; 
+          margin:0 ;
+          box-sizing: border-box;
+      }
+      body{                  /*background-image creation*/
+      background-image:url();
+      background-size:cover;
+      background-position:center;
+      box-sizing:border-box;
+      }
+      .menu-bar                          /* menu bar configuration*/
+      {
+          background:green;
+          text-align:center;
+         
+      }
+      .menu-bar ul             /*display of elements in menu bar*/
+      {
+         display:flex;
+         list-style:none;
+         color:green; 
+      }
+      .menu-bar ul li       /*spcaing betwen elements*/
+      {
+        width:70px;
+        margin:10px;
+        
+       
+      }
+      li a {
+        font-size: 12px;
+      
+      }
+      .menu-bar ul li a 
+      {
+          text-decoration:none ;
+          color:#fff;
+  
+      }
+      .active ,.menu-bar ul li:hover 
+      {
+       background:red ;
+       border-radius:3px;  
+      }
+      .sub-menu
+      { 
+          display:none;
+      }
+      .menu-bar ul li:hover .sub-menu
+      {
+        display:block; 
+        position:absolute;
+        background:rgb(0,100,0) ;
+        margin-top:-40px;
+        margin-left:-15px ;  
+        
+      }
+      .menu-bar ul li:hover .sub-menu ul 
+      {
+          display:block ;
+          margin:5px;
+          }
+          .menu-bar ul li:hover .sub-menu ul li 
+      {
+       
+          width:120px ;
+          padding:5px;
+          }
+      .sub-menu-2
+      {
+          display:none;
+      
+
+        
+      }
+      .hover-me:hover .sub-menu-2 
+      {
+    
+          position:absolute ;
+          display:block;
+          margin-top:-60px;
+          margin-left:90px ;
+          background:green;
+          font-size:10px;
+
+      }
+      .popup {
+            display: none; /* Hide the pop-up by default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+        }
+
+        .cont{
+            width:100% ;
+            min-height:100vh;
+            background-color: #0b0423;
+            display:flex;
+            align-items:center ;
+            justify-content: center;
+            overflow-y: scroll;
+        }
+        #left,#right 
+        {
+            width:300px ;
+            min-height: 400px;
+            margin:20px;
+            border:2px dashed #fff;
+        }
+        .list{
+            background-color: #e91e63;
+            height:60px;
+            margin:30px;
+            color:#fff;
+            cursor:grab;
+        }
+        /* Styling for the overlay */
+        .overlay {
+            display: none; /* Hide the overlay by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+     
+        .pop{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 9999; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px; /* Place content 60px from the top */
+  }
+
+
+  .pap{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 9999; /* Sit on top */
+    left: 0;
+   top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px; /* Place content 60px from the top */
+  }
+
+  /* Popup content */
+  .popup-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  .pop-content {
+    background-color: #fefefe;
+  /* 15% from the top and centered */
+    padding: 10px;
+    border: 1px solid #888;
+   
+  }
+
+  /* Close button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .hidden {
+            display: none;
+        }
+
+.container{
+    position: absolute;
+    left:10%;
+    top:10%;
+
+}
+
+ .x2{
+    background-color: whitesmoke; 
+   width:300px;
+   height:450px;
+   overflow-y: scroll;
+  font-size:18px;
+  display: flex;
+  flex-direction: column;
+ }
+ .x3{
+   display:flex;
+   flex-direction: column; 
+ }
+
+      
+.xq {display: none;
+  position: fixed;
+            background-color: #fff;
+            width: 500px;
+            height: 400px;
+            display: flex;
+            top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border:2px solid black;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+  
+}
+
+        .x1q {
+            background-color: white;
+            width: 200px;
+            height: 395px;
+            display: flex;
+            flex-direction: column;
+            border-right:3px solid black;
+        }
+
+        .k1q {
+            width: 200px; 
+            height: 30px;
+            background-color: black;
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+            cursor: pointer; /* Change cursor to pointer for better UX */
+        }
+
+        .x2q {
+          position: fixed;
+        top:0;
+          left:40%;
+            width: 300px; /* Adjust width of x2 */
+            height: 400px; /* Adjust height of x2 */
+            padding: 20px;
+            box-sizing: border-box;
+          
+        }
+        .k3q{text-align:center;}
+.pp {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+    }
+    .over {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    #bell {
+            position: relative;
+            cursor: pointer;
+        }
+
+
+        #notifications-box {
+            display: none;
+            position: absolute;
+            top: 58px;
+            left:60%;
+            width: 400px;
+         
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            z-index: 1;
+        }
+        .notification-message {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+
+
+      </style>
+</head>
+<body>
+    <!--
+1)creation of list using div<ul><li></li></ul>
+2)under list create sub menu 
+Traffic Building,ULY-1,ULY-3,ULY-4,ULY-6,Weighting Bridge and Weighting Bridge 2
+
+    -->
+    <!--hook out  deletion  hook in to generate work order  -->
+    <marquee>
+      <p>
+        Namaste
+      </p>
+    </marquee>
+
+    <div class="x234" style="display:flex; ">
+   <h1>YARD MANAGEMENT SYSTEM</h1>
+   <i class="fa  fa-user-circle" style="margin-left:30%;margin-top: 6px;font-size:24px;" onclick="gk()"></i> 
+   <div id="bell">
+    <i class="fa fa-bell" style="font-size: 30px;margin-left:13px;"></i>
+  
+</div>
+<script>
+  // JavaScript code for handling notifications
+  document.addEventListener('DOMContentLoaded', () => {
+      const bellIcon = document.getElementById('bell');
+      const notificationBadge = document.getElementById('notification-badge');
+      const notificationsBox = document.getElementById('notifications-box');
+
+      // Event listener for bell icon click
+      bellIcon.addEventListener('click', () => {
+          const isNotificationsVisible = notificationsBox.style.display == 'block';
+
+          if (isNotificationsVisible) {
+              notificationsBox.style.display = 'none';
+          } else {
+              notificationsBox.style.display = 'block';
+          }
+      });
+
+   
+      
+  });
+</script>
+  </div>
+ 
+  {% if ms %}
+  <div id="notifications-box">
+ {% for k in ms %}
+    <div class="notification-message" style="display:flex;flex-direction:column ;background-color:  {{k.c}}"><div class="x1s">{{k.val}}</kbd></div><div class="x2s" style="position:relative;left:60%; font-size:12px;">{{k.t}}</div></div>
+  {% endfor %}
+</div>
+{% endif %}
+  <div id="over" onclick="cl()"
+  style="display: none;
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.5);
+         z-index: 999;"></div>
+  <div class="xq" id="pp" style="display: none;">
+      <div class="x1q">
+      <i class="fa  fa-user-circle" style="margin-left:40%;margin-top: 6px;font-size:36px;"></i> 
+      <div class="k3q">{{kl.nam}} <br><div class="k312q" style=" font-size:14px;">{{kl.gr}}</div><div class="k31" style="text-align:left; font-size:12px;">Last-login:{{k12}}</div></div>
+          <div class="k1q" id="user">Settings</div>
+          <div class="k1q" id="shortcuts">Shortcuts</div>
+          <div class="k1q" id="weight">Change Password</div>
+          <div class="k1q"><a href="{% url 'logout'%}" style="color:red;text-decoration: none;">Log out</a></div>
+      </div>
+      <div class="x2q" id="contenta"></div>
+      <script>
+        // JavaScript to handle content updates based on clicked element
+        const contentDiv = document.getElementById('contenta');
+    
+        // Function to update x2 content based on clicked element
+        function updateContent(id) {
+            switch (id) {
+                case 'user':
+                    contentDiv.innerHTML = `<form action="{% url  'updi' %}" method="POST" style="max-width: 300px; margin: 0 auto;"id="myf">
+                      {% csrf_token %}
+    <label for="cars" style="font-size: 18px; color: #333; margin-bottom: 10px;">Choose Group</label><br>
+    <select name="vsp" id="vsp" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px; font-size: 16px;">
+        <option value="YARD_ADMIN">YARD_ADMIN</option>
+        <option value="KIOSK">KIOSK</option>
+        <option value="Traffic Building">Traffic Building</option>
+        <option value="Guest">Guest</option>
+    </select><br><br>
+    <input type="submit" value="Submit" onclick="ghnb()" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">
+</form>
+`
+                    break;
+                case 'shortcuts':
+                    contentDiv.innerHTML = `<div class="container">
+    <p style="display: inline; margin-right: 5px;">ctrl+M</p>
+    <div class="qw12" style="display: inline; margin-left: 100px;">Map</div>
+    <br>
+    <br>
+    <p style="display: inline; margin-right: 5px;">ctrl+Q</p>
+    <div class="qw12" style="display: inline; margin-left: 100px;">Home</div>
+</div>
+`;
+                    break;
+                case 'weight':
+                    contentDiv.innerHTML = `  <form id="myForm" style="margin-top: 20px;">
+        <label for="input1">New Password:</label>
+        <input type="password" id="input1" name="New Password" placeholder="Enter value 1" style="margin-bottom: 10px;"><br>
+        
+        <label for="input2">Confirm password:</label>
+        <input type="password" id="input2" name="input2" placeholder="Enter value 2" style="margin-bottom: 10px;"><br>
+        
+      
+        
+        <button type="button" onclick="handleConfirm()" style="background-color: #007bff; color: #ffffff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Confirm</button>
+    </form>
+ 
+    
+`
+                    break;
+                case 'about':
+                    contentDiv.innerHTML = '<p>About content goes here...</p>';
+                    break;
+                default:
+                    contentDiv.innerHTML = 'Select an option from the menu...';
+            }
+        }
+        function ghnb(){
+          event.preventDefault();
+          Swal.fire({
+        title: 'Confirm Group Change!!!',
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Perform further actions if confirmed (e.g., submit form data)
+            Swal.fire('Success!', 'Password Changed', 'success');
+                    // Reload the page or update UI as needed
+                    setTimeout(function() {
+                        document.getElementById('myf').submit() ;
+                    }, 1000);
+        }
+    });
+
+
+        }
+        function handleConfirm() {
+    // Retrieve values from password input fields
+    const newPassword = document.getElementById('input1').value;
+    const confirmPassword = document.getElementById('input2').value;
+
+    // Check if passwords match
+    if (newPassword !== confirmPassword) {
+        // Display SweetAlert error message for password mismatch
+        Swal.fire({
+            title: 'Password Mismatch',
+            text: 'The entered passwords do not match. Please try again.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+        return; // Exit function early if passwords do not match
+    }
+    const formData = new FormData();
+    formData.append('new_password', newPassword);
+
+    // Send POST request to Django view to change password
+    fetch('changepassword', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}'  // Include CSRF token for CSRF protection
+        }
+    })
+    // Display SweetAlert confirmation dialog if passwords match
+    
+    Swal.fire({
+        title: 'Confirm Password Change',
+        html: `You are about to change your password to:<br><strong>${newPassword}</strong>`,
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Perform further actions if confirmed (e.g., submit form data)
+            Swal.fire('Success!', 'Password Changed', 'success');
+                    // Reload the page or update UI as needed
+                    setTimeout(function() {
+                        window.location.href = 'changepassword';
+                    }, 1000);
+        } 
+    });
+}
+        // Event listener to handle clicks on .k1 elements
+        const k1Elements = document.querySelectorAll('.k1q');
+        k1Elements.forEach(element => {
+            element.addEventListener('click', () => {
+                updateContent(element.id);
+            });
+        });
+    </script>
+  
+</div>
+
+<script>
+    // Function to display the modal and overlay
+    
+    function gk() {
+        document.getElementById("over").style.display = "block";
+        document.getElementById("pp").style.display = "block";
+    }
+
+    // Function to close the modal and overlay
+    function cl() {
+        var overlay = document.getElementById("over");
+        var modal = document.getElementById("pp");
+
+        // Check if the clicked element is the overlay itself
+        if (event.target === overlay) {
+            modal.style.display = "none";
+            overlay.style.display = "none";
+        }
+    }
+</script>
+    <div class="menu-bar">
+    <ul>
+       
+        <li><a href="#">Yard Map</a>
+        <div class="sub-menu">
+            <ul>
+               <li class="hover-me"><a href="{% url 'map' %}">Yard Map 2D</a>
+                <div class="sub-menu-2">
+                    <ul>
+                    <li><a href="#">CSPY East Block</a></li>
+                    <li><a href="#">CSPY West Block</a></li>
+                    <li><a href="#">Consignment</a></li>
+                    <li><a href="#">Kiosk</a></li>
+                    <li><a href="#">Kiosk-2</a></li>
+                    <li><a href="#">LY-1</a></li>
+                    <li><a href="#">LY-2</a></li>
+                    <li><a href="#">LY-3</a></li>
+                    <li><a href="#">LY-4</a></li>
+                    <li><a href="#">Parking</a></li>
+                    <li><a href="#">Reprocessing</a></li>
+                    <li><a href="#">Consignment</a></li>
+          
+                    <li><a href="#">ULY-1</a></li>
+                    <li><a href="#">ULY-3</a></li>
+                    <li><a href="#">ULY-4</a></li>
+                    <li><a href="#">ULY-6</a></li>
+                    <li><a href="#">Weighting Bridge</a></li>
+                    <li><a href="#">Weighting Bridge-2</a></li>
+              </ul>
+                </div>
+            
+            
+            
+            
+            
+            </li>
+            </ul>
+            </div></li>
+        <li><a href="#">Monitors</a>
+            <div class="sub-menu">
+                <ul>
+                    <li><a href="#">Yard Monitor</a>
+                        
+                 </li>
+            <li><a href="{% url 'rok' %}">Rake Monitor</a>
+           
+        </li>
+        <li><a href="{% url 'hok' %}">Hook Monitor</a></li>
+        <li><a href="{% url 'dash' %}">DashBoard </a></li>
+    </ul>
+    </div>  
+       </li>
+        <li class="hover-me"><a href="#">Rake Management</a>
+        <div class="sub-menu">
+          <ul>
+            <li><a href="{% url 'home' %}">Hooks</a></li>
+            <li><a href="{% url 'rake' %}">Rakes</a></li>
+            <li><a href="{% url 'wagontype'%}">Wagon Type Configuration</a></li>
+            <li><a href="{% url 'prerake' %}">Pre Rake Out Verification</a></li>
+          </ul>
+        </div>
+        </li>
+        <li class="hover-me"><a href="#">Truck Manager</a>
+        <div class="sub-menu">
+<ul>
+<li><a href="{% url 'inb' %}">Inbound Trucks</a></li>
+<li><a href="{% url 'dis' %}">Dispatch Trucks</a></li>
+<li><a href="#">Dispatch by Rake</a></li>
+
+</ul>
+
+
+        </div>
+        
+        
+        </li>
+        <li><a href="#">Workorders</a>
+            <div class="sub-menu">
+                <ul>
+                   <li class="hover-me"><a href="#">WorkOrder Index</a>
+                   
+                    <div class="sub-menu-2">
+                        <ul>
+                        <li><a href="{% url 'inboundorder' %}">Inbound via Hook</a></li>
+                        <li><a href="{% url 'inb' %}">Inbound via Truck</a></li>
+                        
+                        <li><a href="{% url 'materialp' %}">MaterialProcessing</a></li>
+                      
+                        <li><a href="#">Rake Dispatch</a></li>
+                        <li><a href="#">Rake Outbound</a></li>
+                        <li><a href="#">DirectDispatchbyRake</a></li>
+                        <li><a href="{% url 'dis' %}">Truck Dispatch</a></li>
+                        <li><a href="#">Truck Outbound</a></li>
+                        <li><a href="#">DirectDispatchbyTruck</a></li>
+                       
+                        <li><a href="{% url 'ord' %}">CurrentWorkorders</a></li>
+                        <li><a href="#">FinishedWorkorders</a></li>
+                        <li><a href="#">CancelledWorkorders</a></li>
+                        
+                  </ul>
+                    </div>
+          
+                </li>
+                </ul>
+               
+                    <ul>
+
+                       <li class="hover-me"><a href="#">WorkOrder Manager</a>
+                        <div class="sub-menu-2">
+                          <ul>
+                          <li><a href="#">Hook Unload</a></li>
+                          <li><a href="#">Rake Dispatch</a></li>
+                        
+                        </ul>
+                        </div>
+                       </li>
+                    </ul>              
+                                </div>
+        </li>
+        <li><a href="#">Search</a></li>
+        <li class="hover-me"><a href="#">Manual Updates</a>
+          <div class="sub-menu">
+            <ul>
+              <li><a href="#">Inventory</a></li>
+            
+           
+              <li><a href="{% url 'mp' %}">Material Processing</a></li>
+           
+            </ul>
+          </div>
+          </li>
+        <li><a href="#">Reports</a>
+        <div class="sub-menu">
+            <ul>
+               <li class="hover-me"><a href="#">Miscellenous</a>
+              <div class="sub-menu-2">
+           
+                    <ul>
+                    <li><a href="{% url 'dispatchtruck' %}">dispatch truck history</a></li>
+                    <li><a href="#">rake plan received</a></li>
+                    <li><a href="{% url 'fnote'%}">f-note report history</a></li>
+                    <li><a href="#">pre rake out</a></li>
+                    <li><a href="{% url 'prerakeverificationsearch' %}">pre rake out verification</a></li>
+                    <li><a href="{% url 'rakechallan' %}">rakes challan gross weightment report</a></li>
+                    <li><a href="{% url 'mps' %}">material processing report</a></li>
+                    <li><a href="{% url 'indent' %}">indent dispatched  through yms</a></li>
+                    <li><a href="#">pre raked out vsloaded</a></li>
+                    <li><a href="#">dispatch rake verification</a></li>
+                    <li><a href="{% url 'hold' %}">hold wagon history report </a></li>
+            
+              </ul>
+                </div>
+              
+              
+              
+              </li>
+            </ul>
+          
+                 <ul>
+                   <li class="hover-me"><a href="#">Work Orders</a>
+                    <div class="sub-menu-2">
+           
+                      <ul>
+                      <li><a href="{% url 'hooksearch'%}">hook workorders</a></li>
+                      <li><a href="{% url 'rakesearch'%}">rake plan workorders</a></li>
+                      <li><a href="{% url 'finordersearch'%}">finished workorders</a></li>
+                      <li><a href="{% url 'findetail' %}">finished workorders detail</a></li>
+                      <li><a href="{% url 'cancelsearch'%}">cancelled workorders</a></li>
+                    
+              
+                </ul>
+                  </div>
+                  
+                  
+                  
+                  
+                  
+                  </li>
+                </ul>
+              
+                    <ul>
+                       <li class="hover-me"><a href="#">Interface Reports</a>
+                        <div class="sub-menu-2">
+           
+                          <ul>
+                          <li><a href="#">hook recieved history</a></li>
+                          <li><a href="{% url 'captive' %}">captive truck received history</a></li>
+                          <li><a href="#">rake plan received history</a></li>
+                          <li><a href="#">truck plan received history</a></li>
+                          <li><a href="#">rake dispatch history report</a></li>
+                          <li><a href="#">rake dispatch material report history</a></li>
+                       
+                       
+                          
+                       
+                  
+                    </ul>
+                      </div>
+                      
+                      
+                      
+                      
+                      </li>
+                    </ul>
+                  
+                        <ul>
+                           <li class="hover-me"><a href="#">Yard Reports</a>
+                            <div class="sub-menu-2">
+                            <ul>
+                              <li><a href="{% url 'locationhistory' %}">location history</a></li>
+                              <li><a href="{%  url 'layersearch' %}">layer wise report</a></li>
+                             
+                         
+                              <li><a href="#">material code wise bins report </a></li>
+                             
+                            
+                      
+                        </ul>
+                      </div>
+                      </li>
+                        </ul>
+                       
+                            
+                            </div>
+                        </li>
+        <li><a href="#">Configuration</a>
+            <div class="sub-menu">
+                <ul>
+                   <li><a href="{% url 'sy' %}">Sync Material Weight</a></li>
+                </ul>
+                
+                
+                    <ul>
+                       <li><a href="{% url 'dev' %}">Update Device Information</a></li>
+                    </ul>
+                   
+                    
+                        <ul>
+                           <li><a href="{% url 'mat' %}">Material Management</a></li>
+                        </ul>
+                      
+                        
+                            <ul>
+                               <li><a href="{% url 'bin' %}">Bin Configuration</a></li>
+                            </ul>
+                          
+                            
+                                <ul>
+                                   <li><a href="{% url 'gp' %}">GPS Configuration</a></li>
+                                </ul>
+                               
+                                    
+                                 
+                                    
+                                       
+                                        
+                                       
+                                            <ul>
+                                               <li><a href="{% url 'usr' %}">User Configuration</a></li>
+                                            </ul>
+                                        
+                                         
+                                                <ul>
+                                                   <li><button onclick="togglePopup()" style="background-color: rgb(0,100,0); color:white; border:0;font-size:12px;font-family: 'Times New Roman', Times, serif;">Update Authority</button></li>
+                                                </ul>
+                                              
+                                                    
+                                                    
+                                                        <ul>
+                                                           <li><a href="{% url 'veh' %}">User Defined Vehicle Name</a></li>
+                                                        </ul>
+                                                        </div>
+        </li>
+    </ul>
+</div>
+
+
+
+<div class="bnt">
+<button style="background-color:aqua;border:0;"><a href="#" style="text-decoration:none;">Hooks</a></button>
+<button><a href="{% url 'rake'%}"style="text-decoration:none;" >Rakes</a></button>
+<a href="{% url 'generate_csv' %}" style="position: relative; left: 70%;">
+  <i class="fa fa-download" style="font-size: 24px; background-color: gray;border-radius:30%; color:yellow;"></i> 
+</a>
+
+</div>
+
+<div class="over" id="over" onclick="clse()"></div>
+<div class="pp" id="pp">
+  <h2>Form</h2>
+  <form>
+      <label for="name">Name:</label><br>
+      <input type="text" id="name" name="name" required><br>
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email" required><br><br>
+      <button type="submit">Submit</button>
+  </form>
+</div>
+<script>
+  // Function to open the pop-up
+  function wg() {
+      document.getElementById("pp").style.display = "block";
+      document.getElementById("over").style.display = "block";
+  }
+
+  // Function to close the pop-up
+  function clse() {
+      document.getElementById("pp").style.display = "none";
+      document.getElementById("over").style.display = "none";
+  }
+</script>
+
+<br>
+
+<script>
+  // Function to handle key press event
+  function handleKeyPress(event) {
+      // Check if the Ctrl key (Cmd on Mac) and the 'm' key are pressed simultaneously
+      if (event.ctrlKey && (event.key === 'm' || event.key === 'M')) {
+          // Redirect to the specified URL
+          window.location.href = 'http://127.0.0.1:8000/map';
+      }
+      if (event.ctrlKey && (event.key === 'q' || event.key === 'Q')) {
+          // Redirect to the specified URL
+          window.location.href = 'http://127.0.0.1:8000/home';
+      }
+   
+  }
+
+  // Event listener to capture key press events
+  document.addEventListener('keydown', handleKeyPress);
+</script>
+
+{%if f %}
+<table>
+    <tr>
+      <th>PlatForm</th>
+      <th>Hook No</th>
+      <th>Status</th>
+      <th>Wagon Count</th>
+      <th>Hook In</th>
+      <th>Generate Workorders</th>
+      <th>Unloading Completed</th>
+      <th>Hook Out</th>
+    </tr>
+    {%for l in f %}
+    <tr>
+      <td>{{l.platform}}</td>
+      <td><a href="{%url 'index' l.id %}">{{l.h_number}}</a></td>
+      <td>{{l.Status}}
+  
+      </td>
+      <td>{{l.count}}</td>
+      <td >{% if l.Status == "PLAN" %}<a  style="text-decoration:none;" onclick="modale('{{ l }}','{{l.h_number}}')">Hook in</a>
+        <div id="over{{l}}" onclick="clseq('{{l}}')"
+                                 style="display: none;
+                                        position: fixed;
+                                        top: 0;
+                                        left: 0;
+                                        width: 100%;
+                                        height: 100%;
+                                        background-color: rgba(0, 0, 0, 0.5);
+                                        z-index: 999;"></div>
+                            
+                            <!-- Pop-up form -->
+                            <div class="pp" id="pp{{l}}" style="display: none;">
+                              
+                                <form method="POST" action="{% url 'plat' l.id %}" id="myForm">
+                                  {% csrf_token %}
+                                    <label for="name">Drop Bin</label><br>
+                                    <input  type='text'id="nameq{{l}}" name="nameq{{l}}" value="12"  style="margin-bottom: 20px; padding: 0;" readonly><br>
+                                    <label for="name">Drop Zone</label><br>
+                                    <input type="text" id="namq{{l}}" name="namq{{l}}" style="margin-bottom: 20px; padding: 0;" ><br>
+                                    <button onclick="conf()">Submit</button>
+                                
+                                  </form>
+                            </div>
+        <script>
+         function modale(l,p) {
+                                
+                                document.getElementById("over" + l).style.display = "block";
+                                document.getElementById("pp" + l).style.display = "block";
+                        
+                               document.getElementById('nameq'+l).value=p;
+                             
+                              }
+                        
+                            // Function to close the modal and overlay
+                            function clseq(l) {
+                              
+                                var overlay = document.getElementById("over" + l);
+                                var modal = document.getElementById("pp" + l);
+                        
+                                // Check if the clicked element is the overlay itself
+                                if (event.target === overlay) {
+                                    modal.style.display = "none";
+                                    overlay.style.display = "none";
+                                }
+                            }
+                            function conf() {
+  event.preventDefault();
+    Swal.fire({
+        title: `Hook Arrival Request`, // Dynamically insert the item's name
+        text: "Are you sure to bring in Hook at platform?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        reverseButtons: true,
+    
+        timerProgressBar: true // Display a progress bar indicating the remaining time
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire('Success!', 'PlatForm Assigned', 'success');
+            setTimeout(function() {
+                          
+                     
+           document.getElementById('myForm').submit() }, 3000);
+        } else {
+          
+            // Handle cancellation or do nothing
+        }
+    });
+}
+
+
+
+      
+      </script>
+
+
+      {% else %}<a href="" style="text-decoration:none;" onclick="gh(event)">Hook in</a>
+      
+      <script>
+   function gh(event){
+    event.preventDefault();
+    
+                          
+                       
+    Swal.fire({
+  icon: "error",
+  title: "Oops...",
+  text: "Already Platform Assigned",
+
+});
+
+
+   }
+
+
+      </script>
+      
+      {% endif %}</td>
+     <td onclick="ghi()">Generate
+      <script>
+       
+        function ghi() {
+             Swal.fire({
+                 title: `Are you sure to generate Workorders?`, // Dynamically insert the item's name
+                 
+                 text: "You won't be able to revert this!",
+                 icon: 'warning',
+                 showCancelButton: true,
+                 confirmButtonText: 'Yes, Generate!',
+                 cancelButtonText: 'No, cancel!',
+                 reverseButtons: true
+             }).then((result) => { 
+                 if (result.isConfirmed) {
+                     Swal.fire('Success!', 'deleted', 'success');
+                     // Reload the page or update UI as needed
+                     setTimeout(function() {
+                         
+                     }, 1000);
+                 }
+             });
+         }
+     
+       </script>
+ 
+ 
+    
+    
+    </td>
+      <td>
+      <a  onclick="confirmDe('{{l.id}}','{{l.h_number}}')">Unloading Order</a>
+      <script>
+       
+       function confirmDe(id, itemName) {
+            Swal.fire({
+                title: `Are you sure to Unload this?`, // Dynamically insert the item's name
+                
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => { 
+                if (result.isConfirmed) {
+                    Swal.fire('Success!', 'deleted', 'success');
+                    // Reload the page or update UI as needed
+                    setTimeout(function() {
+                        
+                    }, 1000); 
+                }
+            });
+        }
+    
+      </script>
+
+
+      
+      
+      </td>
+      <td><a  onclick="confirmDelete('{{l.id}}','{{l.platform}}')">Hook out</a>
+      <script>
+       
+       function confirmDelete(id, itemName) {
+            Swal.fire({
+                title: `Are you sure to Hook out ${itemName}?`, // Dynamically insert the item's name
+                
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => { 
+                if (result.isConfirmed) {
+                    Swal.fire('Success!', 'deleted', 'success');
+                    // Reload the page or update UI as needed
+                    setTimeout(function() {
+                        window.location.href = 'delte' + id;
+                    }, 1000);
+                }
+            });
+        }
+    
+      </script>
+
+
+      
+      
+      </td>
+      
+    </tr>
+    {% endfor %}
+    {% else %}
+    <h4>No records</h4>
+    {% endif %}
+   
+    
+  {% if k %}
+ 
+  <table>
+    <br>
+    <br>
+    <br>
+    <h3>Wagon details of {{x}}</h3>
+    <tr>
+      <th>Sequence</th>
+      <th>Wagon Name</th>
+      <th>Material Code</th>
+      <th>Material Desc</th>
+      <th>Actual Weight(Mt)</th>
+      <th>Status</th>
+      <th>Work Orders</th>
+      <th>Hold Status</th>
+      <th>Hold Wagon</th>
+      <th>View Materials</th>
+      <th>From ERP</th>
+    </tr>
+ 
+<!--  on clicking wagon name we have to obtain sequence of wagon -->
+    {% for k1,y in li.items %}
+    <tr>
+      
+      <td>{{forloop.counter}}</td>
+      <td>{% for z in k2 %}{%if z.wname == k1 %}<a onclick="tog('{{forloop.counter}}')">{{k1}}</a><br>
+        <div id="{{forloop.counter}}" class="pop">
+          <!-- Popup content -->
+           <!--
+        <br>
+        {% for l in k2 %}
+        {% if l.wname == k1 %}
+      <p style="background-color: aqua;">  {{l.uid}}{{l.wname}}</p><br> 
+        {% else %}
+        <p>{{l.uid}}{{l.wname}}</p><br> 
+        {% endif %}
+        {% endfor %}
+        
+        -->
+          <div class="container">
+           
+             
+             <div class="x1">
+             
+   <div class="x2">
+    <span class="close" onclick="tog('{{forloop.counter}}')" style="position:relative;left:90%;">&times;</span>
+    {% for l in k2 %}
+    {% if l.wname == k1 %}
+    <div class="x4" style="background-color: aqua;"> {{l.uid}}{{l.wname}}</div>
+    {% else %}
+    <div class="x4"> {{l.uid}}{{l.wname}}</div>
+    {% endif %}
+       
+  
+    {% endfor %} 
+   </div>
+
+    
+            
+         
+        {% endif %}{% endfor %}</td>
+      <td>
+      {% for z in y %}
+     <a>{{z.cod}}</a>
+   
+      {% endfor %}</td>
+      <td>
+      {% for z in y %}
+      {{z.de}}<br>
+      {% endfor %}</td>
+      <td>
+      {% for z in y %}
+      {{z.wt}}<br>
+      {% endfor %}</td>
+      <td>{% for z in y %} {% if forloop.first %}
+        <a>{{z.stat}}</a>
+      {% endif %}
+    {% endfor %}</td>
+      {% if lpu == "N/A" %}<td>N/A</td>
+      {% else%}
+      <td>{% for z in y %}<a href="test/{{z.od}}">{{z.od}}</a><br>{% endfor %}</td>
+      {% endif %}
+      <td>{% for z in k2 %}{%if z.wname == k1 %}<a>{{z.st}}</a><br>{% endif %}{% endfor %}</td>
+      <td>
+        {% for z in y %}
+          {% if forloop.first %}
+            <a onclick="g('{{ z.cod }}')">Hold</a>
+            <div id="{{ z.cod }}" class="pop">
+              <!-- Popup content -->
+              <div class="popup-content">
+                <span class="close" onclick="g('{{ z.cod }}')">&times;</span>
+                <form>
+                  Reason:<input type="text">
+                  <button type="submit">Submit</button>
+                  </form>
+
+                
+              
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </td>
+      
+     <td><a onclick="f('{{k1}}')">View</a></td> 
+
+ 
+     
+      <td>N/A</td>
+    </tr>
+    
+    <div id="{{k1}}" class="pap">
+      <!-- Popup content -->
+      <div class="pop-content">
+        <span class="close" onclick="f('{{k1}}')">&times;</span>
+        <h3>{{y}}</h3>
+        
+       
+      </div>
+    </div>
+    <script>
+      // Function to toggle the popup
+      function tog(id) {
+        var popup = document.getElementById(id);
+        if (popup.style.display === "block") {
+          popup.style.display = "none";
+        } else {
+          popup.style.display = "block";
+        }
+      }
+      function f(z){
+       var popup=document.getElementById(z); 
+       if (popup.style.display === "block") {
+          popup.style.display = "none";
+
+        } else {
+          popup.style.display = "block";
+        }
+
+
+
+      }
+      function g(id) {
+        var popup = document.getElementById(id);
+        if (popup.style.display === "block") {
+          popup.style.display = "none";
+        } else {
+          popup.style.display = "block";
+        }
+      }
+    
+      </script>
+   {% endfor %}
+  </table>
+  {%else%}
+  {% endif %}
+
+</body>
+
+<div id="popup" class="popup">
+  <h5>UPDATE USER AUTHORITY</h5>
+  <br>
+  <br>
+  Authority Group:<select id="mySelect">
+    <option value="">Select an option</option>
+    <option value="option1">West Block</option>
+    <option value="option2">East Block</option>
+    <option value="option3">Traffic Control</option>
+  </select>
+  <div id="tableContainer"></div>
+</div>
+
+<!-- Overlay to darken the background when the pop-up is displayed -->
+<div id="overlay" class="overlay"></div>
+
+
+<script>
+  // Sample tables related to each option
+  const tables = {
+  option1: `
+  <div class="cont"><div id="left"><div class="list" draggable="true">item-1</div><div class="list" draggable="true">item-2</div>
+  <div class="list" draggable="true">item-3</div></div>
+  <div id="right"></div></div><button style="color:white;">SUBMIT</button>`,
+    option2: '<table><tr><th>Header A</th><th>Header B</th></tr><tr><td>Data A</td><td>Data B</td></tr></table><button>SUBMIT</button>',
+    option3: '<table><tr><th>Header X</th><th>Header Y</th></tr><tr><td>Data X</td><td>Data Y</td></tr></table><button>SUBMIT</button>'
+  };
+  const selectElement = document.getElementById('mySelect');
+const tableContainer = document.getElementById('tableContainer');
+
+// Function to display table based on selected option
+function displayTable() {
+    const selectedOption = selectElement.value;
+    if (selectedOption && tables[selectedOption]) {
+        tableContainer.innerHTML = tables[selectedOption];
+
+        let lists = document.getElementsByClassName("list");
+        let rightbox = document.getElementById("right");
+        let leftbox = document.getElementById("left");
+
+        // Load saved state of items on the right side from local storage
+        const savedItems = JSON.parse(localStorage.getItem('rightItems')) || [];
+
+        // Move saved items from right to left (to restore initial state)
+        savedItems.forEach(item => {
+            const element = rightbox.querySelector(`[data-item="${item}"]`);
+            if (element) {
+                leftbox.appendChild(element);
+            }
+        });
+
+        for (let list of lists) {
+            list.addEventListener("dragstart", function(e) {
+                let selected = e.target;
+                rightbox.addEventListener("dragover", function(e) {
+                    e.preventDefault();
+                });
+                rightbox.addEventListener("drop", function(e) {
+                    rightbox.appendChild(selected);
+                    saveRightItems(); // Save updated state to local storage
+                    selected = null;
+                });
+                leftbox.addEventListener("dragover", function(e) {
+                    e.preventDefault();
+                });
+                leftbox.addEventListener("drop", function(e) {
+                    leftbox.appendChild(selected);
+                    saveRightItems(); // Save updated state to local storage
+                    selected = null;
+                });
+            });
+
+            // Restore the saved state (if any) on initial load
+            if (savedItems.includes(list.dataset.item)) {
+                rightbox.appendChild(list);
+            }
+        }
+    } else {
+        tableContainer.innerHTML = '';
+    }
+}
+
+// Function to save items on the right side to local storage
+function saveRightItems() {
+    const rightItems = Array.from(document.getElementById("right").children).map(child => child.dataset.item);
+    localStorage.setItem('rightItems', JSON.stringify(rightItems));
+}
+
+// Listen for change event on select element
+selectElement.addEventListener('change', displayTable);
+
+// Initial table display when the page loads
+displayTable();
+
+// Listen for submit button click to clear saved items on the right side
+document.querySelector('button').addEventListener('click', function() {
+    localStorage.removeItem('rightItems');
+});
+
+ 
+</script>
+
+<script>
+  // Function to toggle the visibility of the pop-up and overlay
+  function togglePopup() {
+      var popup = document.getElementById('popup');
+      var overlay = document.getElementById('overlay');
+      if (popup.style.display === 'block') {
+          popup.style.display = 'none';
+          overlay.style.display = 'none';
+      } else {
+          popup.style.display = 'block';
+          overlay.style.display = 'block';
+         
+      }
+  }
+  // Close the pop-up when clicking outside of it
+  window.onclick = function(event) {
+      var popup = document.getElementById('popup');
+      var overlay = document.getElementById('overlay');
+      if (event.target == overlay) {
+          popup.style.display = 'none';
+          overlay.style.display = 'none';
+      }
+  }
+  function handleKeyDown(event) {
+    // Check if F12 key is pressed
+    if (event.key === 'F12' || event.keyCode === 123) {
+      // Prevent default behavior
+      event.preventDefault();
+      alert('Cannot be Inspected');
+    }
+  }
+
+  // Attach event listener to the document for keydown event
+  document.addEventListener('keydown', handleKeyDown);
+
+       // Function to handle contextmenu event (right-click)
+       function handleContextMenu(event) {
+            // Prevent default behavior (context menu)
+            event.preventDefault();
+            alert('Right Click is Disabled for security purposes');
+            // Optionally, you can display a custom message or take other actions here
+        }
+
+        // Attach event listener to the document for contextmenu event
+        document.addEventListener('contextmenu', handleContextMenu);
+</script>
+
+</html>
+<!--
+PROGRESS BAR 
+============ 
+<style>
+  /* Style the progress bar */
+  progress {
+    width: 100px;
+    height: 10px;
+   
+  
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  /* Style the progress bar value (indicator) */
+  progress::-webkit-progress-value {
+    background-color: red;
+    border-radius: 5px;
+  }
+</style>
+</head>
+<body>
+
+// progress bar 
+<progress max="100" value="96"></progress>
+
+</body>
+</html>
+
+
+delete and submission will confirm deletion otherwise on refresh you can retreive them
+
+
+<code for zoom in and zoom out>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zoom In to Show Hello World with Box</title>
+<style>
+  .zoomable-container {
+    position: absolute;
+    left:30%;
+    top:50%;    
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    background-color: #ccc; /* Gray background */
+  }
+  .zoomable {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .small-box {
+    width: 50px;
+    height: 50px;
+    background-color: white; /* White box */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none; /* Initially hidden */
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .namaste {
+    width: 50px;
+    height: 50px;
+    background-color: white; /* White box */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none; /* Initially hidden */
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="zoomable-container">
+  
+  <div class="small-box">Hello World</div>
+  <div class="namaste">Namaste</div>
+  <div class="scale-value"></div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $('.small-box').hide();
+      $('.namaste').hide();  
+$(document).ready(function() {
+  var scale = 0;
+  var step = 0.1;
+  var maxScale = 10; // Maximum scale allowed
+  var minScale = 0.5; // Minimum scale allowed
+
+  $('.zoomable-container').on('mousewheel', function(event) {
+    if (event.originalEvent.deltaY > 0) {
+      // Zoom out
+      if (scale > minScale) {
+        scale -= step;
+      }
+    } else {
+      // Zoom in
+      if (scale < maxScale) {
+        scale += step;
+      }
+    }
+  
+    // Update the scale text
+    $('.scale-value').text('Scale: ' + scale.toFixed(2));
+
+    // Apply the new scale
+    $('.zoomable').css('transform', 'scale(' + scale + ')');
+
+    // Show/hide small box and namaste based on scale
+    if (scale >= 2 && scale < 6) {
+      $('.small-box').show();
+      $('.namaste').hide();
+    } else if (scale >=7) {
+      $('.small-box').hide();
+      $('.namaste').show();
+    } else {
+      $('.small-box').hide();
+      $('.namaste').hide();
+    }
+  });
+});
+</script>
+
+</body>
+</html>
+
+
+text in  and text out in html 
+=============================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fade In and Fade Out Example</title>
+<style>
+
+  .fade-in {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  .fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+  }
+  .x{
+      opacity:0;
+   
+    
+    
+  }
+  .x1{  position:absolute;opacity:1;}
+</style>
+</head>
+<body>
+
+<button id="fadeInButton">Fade In</button>
+<button id="fadeOutButton">Fade Out</button>
+<div class="cont" style="display:flex;">
+<div id="targetText" class="fade-out">This text will fade in and out</div><div id="target" class="x">Fans</div>
+</div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const fadeInButton = document.getElementById("fadeInButton");
+  const fadeOutButton = document.getElementById("fadeOutButton");
+  const targetText = document.getElementById("targetText");
+    const target = document.getElementById("target");
+
+  fadeInButton.addEventListener("click", function() {
+       target.classList.remove("x1");
+    targetText.classList.remove("fade-out");
+     target.classList.add("x");
+    targetText.classList.add("fade-in");
+  });
+
+  fadeOutButton.addEventListener("click", function() {
+    targetText.classList.remove("fade-in");
+    targetText.classList.add("fade-out");
+    target.classList.remove("x");
+     target.classList.add("x1");
+     
+  });
+});
+</script>
+
+</body>
+</html>
+
+
+button actions on view material 
+--------------------------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rectangles with Close Buttons</title>
+<style>
+  .rectangle {
+    width: 200px;
+    height: 100px;
+    background-color: lightblue;
+    margin: 10px;
+    position: relative;
+    float: left;
+    cursor: pointer; /* Add cursor pointer to indicate clickability */
+  }
+  .close-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+<div class="rectangle" id="rectangle1" onclick="toggleRectangleColor('rectangle1')">
+  Rectangle 1
+  <span class="close-btn" onclick="closeRectangle('rectangle1')">X</span>
+</div>
+<div class="rectangle" id="rectangle2" onclick="toggleRectangleColor('rectangle2')">
+  Rectangle 2
+  <span class="close-btn" onclick="closeRectangle('rectangle2')">X</span>
+</div>
+<div class="rectangle" id="rectangle3" onclick="toggleRectangleColor('rectangle3')">
+  Rectangle 3
+  <span class="close-btn" onclick="closeRectangle('rectangle3')">X</span>
+</div>
+<button onclick="appearRectangles()">Click me</button>
+<button onclick="toggleSelectAll()" style="margin-top:10%;">Select All</button>
+
+<script>
+  function closeRectangle(rectangleId) {
+    const rectangle = document.getElementById(rectangleId);
+    rectangle.style.display = "none";
+  }
+  
+  function appearRectangles() {
+    for (let i = 1; i < 4; i++) {
+      const rectangle = document.getElementById('rectangle' + i);
+          if (rectangle.style.backgroundColor === "red") {
+        rectangle.style.backgroundColor = "lightblue";
+      }
+      rectangle.style.display = "block";
+    }
+  }
+  
+  function toggleSelectAll() {
+    for (let i = 1; i < 4; i++) {
+      const rectangle = document.getElementById('rectangle' + i);
+      if (rectangle.style.backgroundColor === "red") {
+        rectangle.style.backgroundColor = "lightblue";
+      } else {
+        rectangle.style.backgroundColor = "red";
+      }
+    }
+  }
+  
+  function toggleRectangleColor(rectangleId) {
+    const rectangle = document.getElementById(rectangleId);
+    if (rectangle.style.backgroundColor === "red") {
+      rectangle.style.backgroundColor = "lightblue";
+    } else {
+      rectangle.style.backgroundColor = "red";
+    }
+  }
+</script>
+</body>
+</html>
+
+
+
+material deletion in django from view materials 
+----------------------------------------------- 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delete Multiple Objects</title>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+</head>
+<body>
+   'delete_selected_objects' 
+<form id="deleteForm" method="post" action="">
+  {% csrf_token %}
+
+  <button type="button" onclick="toggleSelection('object1', 'Object 1')">Select Object 1</button>
+  <button type="button" onclick="toggleSelection('object2', 'Object 2')">Select Object 2</button>
+  <button type="button" onclick="toggleSelection('object3', 'Object 3')">Select Object 3</button>
+  <br>
+  
+  <input type="hidden" name="selected_objects" id="selected_objects">
+  <button type="button" onclick="confirmDelete()">Delete Selected Objects</button>
+</form>
+
+<script>
+var selectedObjects = [];
+
+function toggleSelection(objectId, objectName) {
+  var index = selectedObjects.indexOf(objectId);
+  if (index === -1) {
+    selectedObjects.push({id: objectId, name: objectName});
+  } else {
+    selectedObjects.splice(index, 1);
+  }
+  updateHiddenInput();
+}
+
+function updateHiddenInput() {
+  var objectIds = selectedObjects.map(obj => obj.id);
+  document.getElementById('selected_objects').value = objectIds.join(',');
+}
+
+function confirmDelete() {
+  if (selectedObjects.length > 0) {
+    var objectNames = selectedObjects.map(obj => obj.name).join(', ');
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `Are you sure you want to delete these objects: ${objectNames}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete them!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        submitForm();
+      }
+    });
+  } else {
+    Swal.fire('No objects selected!', 'Please select at least one object to delete.', 'warning');
+  }
+}
+
+function submitForm() {
+  updateHiddenInput();
+  document.getElementById('deleteForm').submit();
+}
+</script>
+
+</body>
+</html>
+
+
+text hover and search 
+--------------------- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hover Box with Input</title>
+<style>
+    .container {
+        width: 130px;
+        height: 100px;
+        background-color: lightblue;
+        position: absolute;
+        cursor: pointer;
+        left:10%;
+    }
+    .container:hover .tooltip {
+        display: block;
+    }
+    .tooltip {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        padding: 5px;
+        border-radius: 5px;
+    }
+    .input-container {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+    .input-container input {
+        width: 100px;
+        padding: 5px;
+    }
+</style>
+</head>
+<body>
+<div class="container" onclick="showInput()">
+    <div class="tooltip">Hover text<br>hii</div>
+    <div class="input-container">
+        <input type="text" placeholder="Enter text">
+    </div>
+</div>
+
+<script>
+function showInput() {
+    var inputContainer = document.querySelector('.input-container');
+    inputContainer.style.display = 'block';
+}
+</script>
+</body>
+</html>
+
+   <td>{% for z in k2 %}{%if z.wname == k1 %}<a href="/generate-pdf/{{ z.id }}/">pdf download</a><br>{% endif %}{% endfor %}</td>
+   might be useful
+
+
+BELL BAR
+==========
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notification Bell</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    .notification-container {
+      position: relative;
+    }
+
+    .bell {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    .notification-badge {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: red;
+      color: white;
+      font-size: 12px;
+      padding: 3px 6px;
+      border-radius: 50%;
+    }
+
+    .notification-popup {
+      display: none;
+      position: absolute;
+      top: 30px;
+      right: 0;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      padding: 10px;
+      width: 200px;
+    }
+
+    .notification-popup ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .notification-popup li {
+      padding: 5px 0;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .notification-popup li:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="notification-container">
+    <div class="bell" onclick="showNotifications()">
+      <i class="fas fa-bell"></i>
+      <span id="notificationBadge" class="notification-badge">0</span>
+    </div>
+    <div class="notification-popup" id="notificationPopup">
+      <ul id="notificationList">
+      
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    var notificationCount = 0;
+
+    function showNotifications() {
+      var popup = document.getElementById("notificationPopup");
+      var badge = document.getElementById("notificationBadge");
+      if (popup.style.display === "block") {
+        popup.style.display = "none";
+      } else {
+        popup.style.display = "block";
+        if (notificationCount === 0) {
+          badge.innerText = ""; // Reset the badge count to 0
+          badge.style.backgroundColor = "transparent";
+        } else {
+         badge.innerText = ""; // Reset the badge count to 0
+          badge.style.backgroundColor = "transparent"; // Set the badge count to 3
+        }
+        notificationCount = 0; // Reset the notification count
+      }
+
+      // Vibrate the bell icon for 2 seconds
+      document.querySelector('.bell').classList.add('vibrate');
+      setTimeout(function() {
+        document.querySelector('.bell').classList.remove('vibrate');
+      }, 2000);
+    }
+
+    // Function to add a new notification message
+    function addNotification(message) {
+      var list = document.getElementById("notificationList");
+      var item = document.createElement("li");
+      item.textContent = message;
+      list.appendChild(item);
+      notificationCount++;
+      document.getElementById("notificationBadge").textContent = notificationCount;
+    }
+
+    // Example: add a new notification message
+    addNotification("New message received!1");
+    addNotification("New message received!2");
+    addNotification("New message received!3");
+    addNotification("New message received!4");
+    addNotification("New message received!5");
+    addNotification("New message received!6");
+  </script>
+</body>
+</html>
+
+
+   <img src="static/cdy/img/banner.jpg" style="width:20%;height:20%;"></img> img path
+
+
+MOUSE COORDINATES 
+------------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mouse Coordinates and Search with Red Box</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    position: relative; /* Ensure positioning context for absolute positioning */
+  }
+  #coordinates {
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    font-size: 18px;
+    margin-bottom: 5px;
+    position: absolute;
+    left: 30%; /* Adjust the left position for the coordinates display */
+    top: 40%; /* Adjust the top position for the coordinates display */
+  }
+  .search-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .input-label {
+    margin-right: 10px;
+  }
+  .input-field {
+    width: 80px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+  .search-button {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: lightblue;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+  }
+  .red-box {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    position: absolute;
+    border-radius: 50%; /* Make it a circle */
+    z-index: 1; /* Ensure it's above other content */
+  }
+</style>
+</head>
+<body>
+
+<div id="coordinates">Mouse coordinates: (0, 0)</div>
+
+<div class="search-container" style="margin-top:30%;">
+  <label for="xInput" class="input-label">X:</label>
+  <input type="number" id="xInput" class="input-field" min="0" placeholder="Enter X">
+</div>
+
+<div class="search-container" style="margin-top:30%;">
+  <label for="yInput" class="input-label">Y:</label>
+  <input type="number" id="yInput" class="input-field" min="0" placeholder="Enter Y">
+</div>
+
+<button id="searchButton" class="search-button" style="margin-top:27%;">Search</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const coordinatesElement = document.getElementById('coordinates');
+  const xInput = document.getElementById('xInput');
+  const yInput = document.getElementById('yInput');
+
+  function updateCoordinates(x, y) {
+    // Update the coordinates element with the specified mouse position
+    coordinatesElement.textContent = `Mouse coordinates: (${x}, ${y})`;
+  }
+
+  function moveMouseTo(x, y) {
+    // Create or update the red box at the specified coordinates
+    let redBox = document.querySelector('.red-box');
+
+    if (!redBox) {
+      redBox = document.createElement('div');
+      redBox.className = 'red-box';
+      document.body.appendChild(redBox); // Append red box to the body
+    }
+
+    // Position the red box at the specified coordinates relative to the viewport
+    redBox.style.left = `${x}px`;
+    redBox.style.top = `${y}px`;
+  }
+
+  // Event listener to track mouse movements
+  document.addEventListener('mousemove', function(event) {
+    const x = event.clientX; // X coordinate relative to the viewport
+    const y = event.clientY; // Y coordinate relative to the viewport
+
+    // Update the coordinates element with the current mouse position
+    updateCoordinates(x, y);
+  });
+
+  // Event listener for searchButton click
+  document.getElementById('searchButton').addEventListener('click', function() {
+    const targetX = parseInt(xInput.value) || 0; // Parse X coordinate from input (default to 0 if invalid)
+    const targetY = parseInt(yInput.value) || 0; // Parse Y coordinate from input (default to 0 if invalid)
+    moveMouseTo(targetX, targetY);
+  });
+});
+</script>
+
+</body>
+</html>
+
+
+
+MODIFIED ZOOMING 
+---------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zoom In to Show Hello World with Box</title>
+<style>
+  .zoomable-container {
+    position: absolute;
+    left: 30%;
+    top: 50%;    
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+    scale:1;
+    background-color: #ccc; /* Gray background */
+    transition: background-color 0.3s ease-in-out; /* Smooth background color transition */
+  }
+  .zoomable {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .small-box, .namaste {
+    width: 50px;
+    height: 50px;
+    background-color: white; /* White box */
+    position: absolute;
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+  .search-container {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+  }
+  .input-label {
+    margin-right: 10px;
+  }
+  .input-field {
+    width: 180px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+  .search-button {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: lightblue;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="zoomable-container">
+  <div class="small-box">Hello World</div>
+  <div class="namaste">Namaste1</div>
+  <div class="small-box" style="margin-left:30%;">Hello World</div>
+  <div class="namaste" style="margin-left:30%;">Namaste2</div>
+  <div class="small-box" style="margin-left:60%;">Hello World</div>
+  <div class="namaste" style="margin-left:60%;">Namaste3</div>
+  <div class="small-box" style="top:80%;">Hello World</div>
+  <div class="namaste" style="top:80%">Namaste</div>
+  <div class="scale-value"></div>
+</div>
+
+<div class="search-container">
+  <label for="searchInput" class="input-label">Search Text:</label>
+  <input type="text" id="searchInput" class="input-field" placeholder="Enter text to search">
+  <button id="searchButton" class="search-button">Search</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $('.small-box').hide();
+      $('.namaste').hide();
+$(document).ready(function() {
+  var scale = 1;
+  var step = 0.1;
+  var maxScale = 9; // Maximum scale allowed
+  var minScale = 0.5; // Minimum scale allowed
+  var isYellow = false;
+
+  $('.zoomable-container').on('mousewheel', function(event) {
+    if (event.originalEvent.deltaY > 0 && scale > minScale) {
+      scale -= step; // Zoom out
+    } else if (event.originalEvent.deltaY < 0 && scale < maxScale) {
+      scale += step; // Zoom in
+    }
+  
+    updateScale(scale);
+  });
+
+  $('.namaste').click(function() {
+    if (!isYellow) {
+      // Change background color to yellow and set scale to 2.5
+      $(this).css('background-color', 'yellow');
+      updateScale(4); // Set scale to 2.5
+      isYellow = true;
+      $('.zoomable-container').css('scale','2.5');
+    } else {
+      // Revert background color to white and set scale back to original
+      $(this).css('background-color', 'white');
+      // Set scale back to 1
+      isYellow = false;
+      $('.zoomable-container').css('scale','1');
+    }
+  });
+
+  $('#searchButton').click(function() {
+    var searchText = $('#searchInput').val().trim().toLowerCase();
+    $('.namaste').each(function() {
+      var namasteText = $(this).text().trim().toLowerCase();
+      if (namasteText.includes(searchText)) {
+        // Highlight the corresponding namaste box with yellow background
+        $(this).css('background-color', 'yellow');
+        updateScale(4); // Set scale to 2.5 for the highlighted box
+        isYellow = true;
+         $('.zoomable-container').css('scale','2.5');
+      }
+    });
+  });
+
+  function updateScale(newScale) {
+    $('.scale-value').text('Scale: ' + newScale.toFixed(2));
+    $('.zoomable').css('transform', 'scale(' + newScale + ')');
+
+    // Show/hide small box and namaste based on scale
+    if (newScale >= 1 && newScale < 3) {
+      $('.small-box').show();
+      $('.namaste').hide();
+    } else if (newScale >= 4) {
+      $('.small-box').hide();
+      $('.namaste').show();
+    } else {
+      $('.small-box').hide();
+      $('.namaste').hide();
+    }
+
+    scale = newScale; // Update current scale
+  }
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+MOUSE COORDINATES 
+------------------
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mouse Coordinates and Search with Red Box</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    position: relative; /* Ensure positioning context for absolute positioning */
+  }
+  #coordinates {
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    font-size: 18px;
+    margin-bottom: 5px;
+    position: absolute;
+    left: 30%; /* Adjust the left position for the coordinates display */
+    top: 40%; /* Adjust the top position for the coordinates display */
+  }
+  .search-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .input-label {
+    margin-right: 10px;
+  }
+  .input-field {
+    width: 80px;
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+  .search-button {
+    padding: 8px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: lightblue;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+  }
+  .red-box {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    position: absolute;
+    border-radius: 50%; /* Make it a circle */
+    z-index: 1; /* Ensure it's above other content */
+  }
+</style>
+</head>
+<body>
+
+<div id="coordinates">Mouse coordinates: (0, 0)</div>
+
+<div class="search-container" style="margin-top:30%;">
+  <label for="xInput" class="input-label">X:</label>
+  <input type="number" id="xInput" class="input-field" min="0" placeholder="Enter X">
+</div>
+
+<div class="search-container" style="margin-top:30%;">
+  <label for="yInput" class="input-label">Y:</label>
+  <input type="number" id="yInput" class="input-field" min="0" placeholder="Enter Y">
+</div>
+
+<button id="searchButton" class="search-button" style="margin-top:27%;">Search</button>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const coordinatesElement = document.getElementById('coordinates');
+  const xInput = document.getElementById('xInput');
+  const yInput = document.getElementById('yInput');
+
+  function updateCoordinates(x, y) {
+    // Update the coordinates element with the specified mouse position
+    coordinatesElement.textContent = `Mouse coordinates: (${x}, ${y})`;
+  }
+
+  function moveMouseTo(x, y) {
+    // Create or update the red box at the specified coordinates
+    let redBox = document.querySelector('.red-box');
+
+    if (!redBox) {
+      redBox = document.createElement('div');
+      redBox.className = 'red-box';
+      document.body.appendChild(redBox); // Append red box to the body
+    }
+
+    // Position the red box at the specified coordinates relative to the viewport
+    redBox.style.left = `${x}px`;
+    redBox.style.top = `${y}px`;
+  }
+
+  // Event listener to track mouse movements
+  document.addEventListener('mousemove', function(event) {
+    const x = event.clientX; // X coordinate relative to the viewport
+    const y = event.clientY; // Y coordinate relative to the viewport
+
+    // Update the coordinates element with the current mouse position
+    updateCoordinates(x, y);
+  });
+
+  // Event listener for searchButton click
+  document.getElementById('searchButton').addEventListener('click', function() {
+    const targetX = parseInt(xInput.value) || 0; // Parse X coordinate from input (default to 0 if invalid)
+    const targetY = parseInt(yInput.value) || 0; // Parse Y coordinate from input (default to 0 if invalid)
+    moveMouseTo(targetX, targetY);
+  });
+});
+</script>
+
+</body>
+</html>
+
+workorder manager 
+-------------------
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Linked List Drag and Drop</title>
+      <style>
+          #container {
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-start;
+              padding: 20px;
+          }
+          .box {
+              width: 120px;
+              height: 40px;
+              border: 1px solid #ccc;
+              margin-bottom: 10px;
+              padding: 10px;
+              cursor: pointer;
+              user-select: none;
+          }
+          #left-container {
+              flex-grow: 1;
+              margin-right: 20px;
+          }
+          #right-container {
+              flex-shrink: 0;
+              width: 120px;
+          }
+          #right-container .fixed-box {
+              background-color: #f0f0f0;
+              color: #333;
+          }
+      </style>
+  </head>
+  <body>
+
+  <div id="container">
+      <div id="left-container">
+          <div class="box" draggable="true" data-id="1" data-name="John">ID: 1 | Name: John</div>
+          <div class="box" draggable="true" data-id="2" data-name="Jane">ID: 2 | Name: Jane</div>
+          <div class="box" draggable="true" data-id="3" data-name="Doe">ID: 3 | Name: Doe</div>
+      </div>
+      <div id="right-container">
+          <div class="box fixed-box">Name: Alice</div>
+          <div class="box fixed-box">Name: Bob</div>
+          <div class="box fixed-box">Name: Carol</div>
+      </div>
+  </div>
+
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          const leftBoxes = document.querySelectorAll("#left-container .box");
+          const rightBoxes = document.querySelectorAll("#right-container .box");
+
+          // Add event listeners for left boxes (dragstart and dragend)
+          leftBoxes.forEach(box => {
+              box.addEventListener("dragstart", handleDragStart);
+              box.addEventListener("dragend", handleDragEnd);
+          });
+
+          // Add event listener for right boxes (dragover and drop)
+          rightBoxes.forEach(box => {
+              box.addEventListener("dragover", handleDragOver);
+              box.addEventListener("drop", handleDrop);
+          });
+
+          let draggedBox = null;
+
+          function handleDragStart(event) {
+              draggedBox = event.target;
+              event.dataTransfer.setData("text/plain", draggedBox.dataset.id);
+          }
+
+          function handleDragEnd() {
+              draggedBox = null;
+          }
+
+          function handleDragOver(event) {
+              event.preventDefault();
+          }
+
+          function handleDrop(event) {
+              event.preventDefault();
+              const rightBox = event.target;
+
+              if (rightBox.classList.contains("box") && rightBox.classList.contains("fixed-box")) {
+                  const confirmChange = confirm("Are you sure you want to change the name?");
+                  if (confirmChange) {
+                      const draggedId = event.dataTransfer.getData("text/plain");
+                      const draggedName = draggedBox.dataset.name;
+
+                      // Update the left box name to match the right box name
+                      draggedBox.dataset.name = rightBox.textContent.trim().replace("Name: ", "");
+
+                      // Update the content of the left box
+                      draggedBox.textContent = `ID: ${draggedId} | Name: ${draggedBox.dataset.name}`;
+                  }
+              }
+          }
+      });
+  </script>
+
+  </body>
+  </html>
+
+-->

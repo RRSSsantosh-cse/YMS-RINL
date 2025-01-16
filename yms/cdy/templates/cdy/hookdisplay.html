@@ -1,0 +1,923 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<style>
+.oval {
+  height: 50px;
+  width: 100px;
+  background-color: #555;
+  border-radius: 50%;
+}
+.rect{
+  height: 50px;
+  width: 200px;
+  background-color: #555;
+border-radius: 30%;
+  font-size:17px;
+
+  
+  
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.x {
+  height: 120px;
+  margin-top: 50px;
+  display: flex;
+  align-items: center;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+#y {
+  background-color: green;
+  padding: 50px 20px;
+}
+
+.z {
+  display: flex;
+  background-image: url('static/cdy/img/rail.jpg');
+  margin-left:10px;
+  /* Adjust margin and other styles as needed */
+}
+
+.f {
+  padding: 40px;
+  background-color: blue;
+  margin: 20px;
+  margin-top: 0px;
+  margin-left:50px;
+}
+
+.f1{ padding: 40px;margin:20px; margin-top:0px;}
+.k1{display:flex;}
+*    /**/
+      {
+          padding:0; 
+          margin:0 ;
+          box-sizing: border-box;
+      }
+      body{                  /*background-image creation*/
+      background-image:url();
+      background-size:cover;
+      background-position:center;
+      box-sizing:border-box;
+      }
+      .menu-bar                          /* menu bar configuration*/
+      {
+          background:green;
+          text-align:center;
+         
+      }
+      .menu-bar ul             /*display of elements in menu bar*/
+      {
+         display:flex;
+         list-style:none;
+         color:green; 
+      }
+      .menu-bar ul li       /*spcaing betwen elements*/
+      {
+        width:70px;
+        margin:10px;
+        
+       
+      }
+      li a {
+        font-size: 12px;
+      
+      }
+      .menu-bar ul li a 
+      {
+          text-decoration:none ;
+          color:#fff;
+  
+      }
+      .active ,.menu-bar ul li:hover 
+      {
+       background:red ;
+       border-radius:3px;  
+      }
+      .sub-menu
+      { 
+          display:none;
+      }
+      .menu-bar ul li:hover .sub-menu
+      {
+        display:block; 
+        position:absolute;
+        background:rgb(0,100,0) ;
+        margin-top:-40px;
+        margin-left:-15px ;  
+        
+      }
+      .menu-bar ul li:hover .sub-menu ul 
+      {
+          display:block ;
+          margin:5px;
+          }
+          .menu-bar ul li:hover .sub-menu ul li 
+      {
+       
+          width:120px ;
+          padding:5px;
+          }
+      .sub-menu-2
+      {
+          display:none;
+      
+
+        
+      }
+      .hover-me:hover .sub-menu-2 
+      {
+    
+          position:absolute ;
+          display:block;
+          margin-top:-60px;
+          margin-left:90px ;
+          background:green;
+          font-size:10px;
+
+      }
+      .popup {
+            display: none; /* Hide the pop-up by default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+        }
+
+        .cont{
+            width:100% ;
+            min-height:100vh;
+            background-color: #0b0423;
+            display:flex;
+            align-items:center ;
+            justify-content: center;
+            overflow-y: scroll;
+        }
+        #left,#right 
+        {
+            width:300px ;
+            min-height: 400px;
+            margin:20px;
+            border:2px dashed #fff;
+        }
+        .list{
+            background-color: #e91e63;
+            height:60px;
+            margin:30px;
+            color:#fff;
+            cursor:grab;
+        }
+        /* Styling for the overlay */
+        .overlay {
+            display: none; /* Hide the overlay by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+</style>
+</head>
+<body>
+  <marquee>
+    <p>
+      Namaste
+    </p>
+  </marquee>
+
+  <div class="x234" style="display:flex; ">
+ <h1>YARD MANAGEMENT SYSTEM</h1>
+ {{k12}}
+ <i class="fa  fa-user-circle" style="margin-left:30%;margin-top: 6px;font-size:24px;" onclick="gk()"></i> 
+ <div id="bell">
+  <i class="fa fa-bell" style="font-size: 30px;margin-left:13px;"></i>
+
+</div>
+<script>
+// JavaScript code for handling notifications
+document.addEventListener('DOMContentLoaded', () => {
+    const bellIcon = document.getElementById('bell');
+    const notificationBadge = document.getElementById('notification-badge');
+    const notificationsBox = document.getElementById('notifications-box');
+
+    // Event listener for bell icon click
+    bellIcon.addEventListener('click', () => {
+        const isNotificationsVisible = notificationsBox.style.display == 'block';
+
+        if (isNotificationsVisible) {
+            notificationsBox.style.display = 'none';
+        } else {
+            notificationsBox.style.display = 'block';
+        }
+    });
+
+ 
+    
+});
+</script>
+</div>
+
+{% if ms %}
+<div id="notifications-box">
+{% for k in ms %}
+  <div class="notification-message" style="display:flex;flex-direction:column ;background-color:  {{k.c}}"><div class="x1s">{{k.val}}</kbd></div><div class="x2s" style="position:relative;left:60%; font-size:12px;">{{k.t}}</div></div>
+{% endfor %}
+</div>
+{% endif %}
+<div id="over" onclick="cl()"
+style="display: none;
+       position: fixed;
+       top: 0;
+       left: 0;
+       width: 100%;
+       height: 100%;
+       background-color: rgba(0, 0, 0, 0.5);
+       z-index: 999;"></div>
+<div class="xq" id="pp" style="display: none;">
+    <div class="x1q">
+    <i class="fa  fa-user-circle" style="margin-left:40%;margin-top: 6px;font-size:36px;"></i> 
+    <div class="k3q">{{kl.nam}} <br><div class="k312q" style=" font-size:14px;">{{kl.gr}}</div><div class="k31" style="text-align:left; font-size:12px;">Last-login:{{k12}}</div></div>
+        <div class="k1q" id="user">Settings</div>
+        <div class="k1q" id="shortcuts">Shortcuts</div>
+        <div class="k1q" id="weight">Change Password</div>
+        <div class="k1q"><a href="{% url 'logout'%}" style="color:red;text-decoration: none;">Log out</a></div>
+    </div>
+    <div class="x2q" id="contenta"></div>
+    <script>
+      // JavaScript to handle content updates based on clicked element
+      const contentDiv = document.getElementById('contenta');
+  
+      // Function to update x2 content based on clicked element
+      function updateContent(id) {
+          switch (id) {
+              case 'user':
+                  contentDiv.innerHTML = '<h1>Hello World</h1>';
+                  break;
+              case 'shortcuts':
+                  contentDiv.innerHTML = `<div class="container">
+  <p style="display: inline; margin-right: 5px;">ctrl+M</p>
+  <div class="qw12" style="display: inline; margin-left: 100px;">Map</div>
+  <br>
+  <br>
+  <p style="display: inline; margin-right: 5px;">ctrl+Q</p>
+  <div class="qw12" style="display: inline; margin-left: 100px;">Home</div>
+</div>
+`;
+                  break;
+              case 'weight':
+                  contentDiv.innerHTML = `  <form id="myForm" style="margin-top: 20px;">
+      <label for="input1">New Password:</label>
+      <input type="password" id="input1" name="New Password" placeholder="Enter value 1" style="margin-bottom: 10px;"><br>
+      
+      <label for="input2">Confirm password:</label>
+      <input type="password" id="input2" name="input2" placeholder="Enter value 2" style="margin-bottom: 10px;"><br>
+      
+    
+      
+      <button type="button" onclick="handleConfirm()" style="background-color: #007bff; color: #ffffff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Confirm</button>
+  </form>
+
+  
+`
+                  break;
+              case 'about':
+                  contentDiv.innerHTML = '<p>About content goes here...</p>';
+                  break;
+              default:
+                  contentDiv.innerHTML = 'Select an option from the menu...';
+          }
+      }
+      function handleConfirm() {
+  // Retrieve values from password input fields
+  const newPassword = document.getElementById('input1').value;
+  const confirmPassword = document.getElementById('input2').value;
+
+  // Check if passwords match
+  if (newPassword !== confirmPassword) {
+      // Display SweetAlert error message for password mismatch
+      Swal.fire({
+          title: 'Password Mismatch',
+          text: 'The entered passwords do not match. Please try again.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+      });
+      return; // Exit function early if passwords do not match
+  }
+  const formData = new FormData();
+  formData.append('new_password', newPassword);
+
+  // Send POST request to Django view to change password
+  fetch('changepassword', {
+      method: 'POST',
+      body: formData,
+      headers: {
+          'X-CSRFToken': '{{ csrf_token }}'  // Include CSRF token for CSRF protection
+      }
+  })
+  // Display SweetAlert confirmation dialog if passwords match
+  
+  Swal.fire({
+      title: 'Confirm Password Change',
+      html: `You are about to change your password to:<br><strong>${newPassword}</strong>`,
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonText: 'Confirm',
+      cancelButtonText: 'Cancel',
+  }).then((result) => {
+      if (result.isConfirmed) {
+          // Perform further actions if confirmed (e.g., submit form data)
+          Swal.fire('Success!', 'Password Changed', 'success');
+                  // Reload the page or update UI as needed
+                  setTimeout(function() {
+                      window.location.href = 'changepassword';
+                  }, 1000);
+      } 
+  });
+}
+      // Event listener to handle clicks on .k1 elements
+      const k1Elements = document.querySelectorAll('.k1q');
+      k1Elements.forEach(element => {
+          element.addEventListener('click', () => {
+              updateContent(element.id);
+          });
+      });
+  </script>
+
+</div>
+
+<script>
+  // Function to display the modal and overlay
+  
+  function gk() {
+      document.getElementById("over").style.display = "block";
+      document.getElementById("pp").style.display = "block";
+  }
+
+  // Function to close the modal and overlay
+  function cl() {
+      var overlay = document.getElementById("over");
+      var modal = document.getElementById("pp");
+
+      // Check if the clicked element is the overlay itself
+      if (event.target === overlay) {
+          modal.style.display = "none";
+          overlay.style.display = "none";
+      }
+  }
+</script>
+  <div class="menu-bar">
+  <ul>
+     
+      <li><a href="#">Yard Map</a>
+      <div class="sub-menu">
+          <ul>
+             <li class="hover-me"><a href="{% url 'map' %}">Yard Map 2D</a>
+              <div class="sub-menu-2">
+                  <ul>
+                  <li><a href="#">CSPY East Block</a></li>
+                  <li><a href="#">CSPY West Block</a></li>
+                  <li><a href="#">Consignment</a></li>
+                  <li><a href="#">Kiosk</a></li>
+                  <li><a href="#">Kiosk-2</a></li>
+                  <li><a href="#">LY-1</a></li>
+                  <li><a href="#">LY-2</a></li>
+                  <li><a href="#">LY-3</a></li>
+                  <li><a href="#">LY-4</a></li>
+                  <li><a href="#">Parking</a></li>
+                  <li><a href="#">Reprocessing</a></li>
+                  <li><a href="#">Consignment</a></li>
+        
+                  <li><a href="#">ULY-1</a></li>
+                  <li><a href="#">ULY-3</a></li>
+                  <li><a href="#">ULY-4</a></li>
+                  <li><a href="#">ULY-6</a></li>
+                  <li><a href="#">Weighting Bridge</a></li>
+                  <li><a href="#">Weighting Bridge-2</a></li>
+            </ul>
+              </div>
+          
+          
+          
+          
+          
+          </li>
+          </ul>
+          </div></li>
+      <li><a href="#">Monitors</a>
+          <div class="sub-menu">
+              <ul>
+                  <li><a href="#">Yard Monitor</a>
+                      
+               </li>
+          <li><a href="{% url 'rok' %}">Rake Monitor</a>
+         
+      </li>
+      <li><a href="{% url 'hok' %}">Hook Monitor</a></li>
+      <li><a href="{% url 'dash' %}">DashBoard </a></li>
+  </ul>
+  </div>  
+     </li>
+      <li class="hover-me"><a href="#">Rake Management</a>
+      <div class="sub-menu">
+        <ul>
+          <li><a href="{% url 'home' %}">Hooks</a></li>
+          <li><a href="{% url 'rake' %}">Rakes</a></li>
+          <li><a href="{% url 'wagontype'%}">Wagon Type Configuration</a></li>
+          <li><a href="{% url 'prerake' %}">Pre Rake Out Verification</a></li>
+        </ul>
+      </div>
+      </li>
+      <li class="hover-me"><a href="#">Truck Manager</a>
+      <div class="sub-menu">
+<ul>
+<li><a href="{% url 'inb' %}">Inbound Trucks</a></li>
+<li><a href="{% url 'dis' %}">Dispatch Trucks</a></li>
+<li><a href="#">Dispatch by Rake</a></li>
+
+</ul>
+
+
+      </div>
+      
+      
+      </li>
+      <li><a href="#">Workorders</a>
+          <div class="sub-menu">
+              <ul>
+                 <li class="hover-me"><a href="#">WorkOrder Index</a>
+                 
+                  <div class="sub-menu-2">
+                      <ul>
+                      <li><a href="{% url 'inboundorder' %}">Inbound via Hook</a></li>
+                      <li><a href="{% url 'inb' %}">Inbound via Truck</a></li>
+                      
+                      <li><a href="{% url 'materialp' %}">MaterialProcessing</a></li>
+                    
+                      <li><a href="#">Rake Dispatch</a></li>
+                      <li><a href="#">Rake Outbound</a></li>
+                      <li><a href="#">DirectDispatchbyRake</a></li>
+                      <li><a href="{% url 'dis' %}">Truck Dispatch</a></li>
+                      <li><a href="#">Truck Outbound</a></li>
+                      <li><a href="#">DirectDispatchbyTruck</a></li>
+                     
+                      <li><a href="{% url 'ord' %}">CurrentWorkorders</a></li>
+                      <li><a href="#">FinishedWorkorders</a></li>
+                      <li><a href="#">CancelledWorkorders</a></li>
+                      
+                </ul>
+                  </div>
+        
+              </li>
+              </ul>
+             
+                  <ul>
+
+                     <li class="hover-me"><a href="#">WorkOrder Manager</a>
+                      <div class="sub-menu-2">
+                        <ul>
+                        <li><a href="#">Hook Unload</a></li>
+                        <li><a href="#">Rake Dispatch</a></li>
+                      
+                      </ul>
+                      </div>
+                     </li>
+                  </ul>              
+                              </div>
+      </li>
+      <li><a href="#">Search</a></li>
+      <li class="hover-me"><a href="#">Manual Updates</a>
+        <div class="sub-menu">
+          <ul>
+            <li><a href="#">Inventory</a></li>
+          
+         
+            <li><a href="{% url 'mp' %}">Material Processing</a></li>
+         
+          </ul>
+        </div>
+        </li>
+      <li><a href="#">Reports</a>
+      <div class="sub-menu">
+          <ul>
+             <li class="hover-me"><a href="#">Miscellenous</a>
+            <div class="sub-menu-2">
+         
+                  <ul>
+                  <li><a href="{% url 'dispatchtruck' %}">dispatch truck history</a></li>
+                  <li><a href="#">rake plan received</a></li>
+                  <li><a href="{% url 'fnote'%}">f-note report history</a></li>
+                  <li><a href="#">pre rake out</a></li>
+                  <li><a href="{% url 'prerakeverificationsearch' %}">pre rake out verification</a></li>
+                  <li><a href="{% url 'rakechallan' %}">rakes challan gross weightment report</a></li>
+                  <li><a href="{% url 'mps' %}">material processing report</a></li>
+                  <li><a href="{% url 'indent' %}">indent dispatched  through yms</a></li>
+                  <li><a href="#">pre raked out vsloaded</a></li>
+                  <li><a href="#">dispatch rake verification</a></li>
+                  <li><a href="{% url 'hold' %}">hold wagon history report </a></li>
+          
+            </ul>
+              </div>
+            
+            
+            
+            </li>
+          </ul>
+        
+               <ul>
+                 <li class="hover-me"><a href="#">Work Orders</a>
+                  <div class="sub-menu-2">
+         
+                    <ul>
+                    <li><a href="{% url 'hooksearch'%}">hook workorders</a></li>
+                    <li><a href="{% url 'rakesearch'%}">rake plan workorders</a></li>
+                    <li><a href="{% url 'finordersearch'%}">finished workorders</a></li>
+                    <li><a href="{% url 'findetail' %}">finished workorders detail</a></li>
+                    <li><a href="{% url 'cancelsearch'%}">cancelled workorders</a></li>
+                  
+            
+              </ul>
+                </div>
+                
+                
+                
+                
+                
+                </li>
+              </ul>
+            
+                  <ul>
+                     <li class="hover-me"><a href="#">Interface Reports</a>
+                      <div class="sub-menu-2">
+         
+                        <ul>
+                        <li><a href="#">hook recieved history</a></li>
+                        <li><a href="{% url 'captive' %}">captive truck received history</a></li>
+                        <li><a href="#">rake plan received history</a></li>
+                        <li><a href="#">truck plan received history</a></li>
+                        <li><a href="#">rake dispatch history report</a></li>
+                        <li><a href="#">rake dispatch material report history</a></li>
+                     
+                     
+                        
+                     
+                
+                  </ul>
+                    </div>
+                    
+                    
+                    
+                    
+                    </li>
+                  </ul>
+                
+                      <ul>
+                         <li class="hover-me"><a href="#">Yard Reports</a>
+                          <div class="sub-menu-2">
+                          <ul>
+                            <li><a href="{% url 'locationhistory' %}">location history</a></li>
+                            <li><a href="{%  url 'layersearch' %}">layer wise report</a></li>
+                           
+                       
+                            <li><a href="#">material code wise bins report </a></li>
+                           
+                          
+                    
+                      </ul>
+                    </div>
+                    </li>
+                      </ul>
+                     
+                          
+                          </div>
+                      </li>
+      <li><a href="#">Configuration</a>
+          <div class="sub-menu">
+              <ul>
+                 <li><a href="{% url 'sy' %}">Sync Material Weight</a></li>
+              </ul>
+              
+              
+                  <ul>
+                     <li><a href="{% url 'dev' %}">Update Device Information</a></li>
+                  </ul>
+                 
+                  
+                      <ul>
+                         <li><a href="{% url 'mat' %}">Material Management</a></li>
+                      </ul>
+                    
+                      
+                          <ul>
+                             <li><a href="{% url 'bin' %}">Bin Configuration</a></li>
+                          </ul>
+                        
+                          
+                              <ul>
+                                 <li><a href="{% url 'gp' %}">GPS Configuration</a></li>
+                              </ul>
+                             
+                                  
+                               
+                                  
+                                     
+                                      
+                                     
+                                          <ul>
+                                             <li><a href="{% url 'usr' %}">User Configuration</a></li>
+                                          </ul>
+                                      
+                                       
+                                              <ul>
+                                                 <li><button onclick="togglePopup()" style="background-color: rgb(0,100,0); color:white; border:0;font-size:12px;font-family: 'Times New Roman', Times, serif;">Update Authority</button></li>
+                                              </ul>
+                                            
+                                                  
+                                                  
+                                                      <ul>
+                                                         <li><a href="{% url 'veh' %}">User Defined Vehicle Name</a></li>
+                                                      </ul>
+                                                      </div>
+      </li>
+  </ul>
+</div>
+
+
+{{l1}}
+{{l2}}
+
+<div class="container">
+  {% for x, y in l1.items %}
+    <div class="x">
+     
+      <div id="y">
+        {{ x }}  
+      <a href="#" onclick="togb('{{x}}')"  onmouseover="this.style.color = '#ffcc00';" onmouseout="this.style.color = '#ccc';" style="color:#ccc;">  <i class="fa fa-info-circle" ></i></a>
+      <div class="k1">
+     
+        {% for b in y %}
+          <div class="k2">{{ b.0 }}{% if not forloop.last %},{% endif %}</div>
+        {% endfor %}
+        </div>
+      </div>
+      {% for z in y %}
+        <div class="z">
+          {% for k, l in l2.items %}
+            {% for b in l %}
+              {% if z.0 == k %}
+                <div class="f">{{ b.0 }}</div>
+           
+
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+
+  
+        </div>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>
+{% for x,y in l1.items %}
+<div id="z1{{x}}"  class="mental" style="text-align:center; display: none;">
+  <h3>Platform {{x}} - Rake-{% for n in y %}{{n.0}}{% if not forloop.last %},{% endif %}{% endfor %}<h3>
+    <div class="z2" style="display:flex;">
+   <div class="z3" style="margin-left:20%;">
+    <p>Indent Number</p> 
+    <div class="rect">{% for n in y %}{{n.0}}{% if not forloop.last %},{% endif %}{% endfor %}</div>
+   </div>
+   <div class="z3" style="margin-left:20px;">
+    <p>Rake In Done On</p> 
+    <div class="rect">18/3/24,4:11:15</div>
+   </div>
+   <div class="z3" style="margin-left:20px;">
+    <p>Rake Verified On</p> 
+    <div class="rect">N/A</div>
+   </div>
+   <div class="z3" style="margin-left:20px;">
+        <p>Wagons on Hold</p> 
+    <div class="rect">0</div>
+   </div>
+    </div>
+
+</div>
+{% endfor %}
+<script>
+  function togb(id) {
+    const detailsSections = document.querySelectorAll('.mental');
+    detailsSections.forEach(section => {
+        section.style.display = 'none';});
+      const hiBox = document.getElementById('y');
+      const helloBox = document.getElementById('z1'+id);
+
+      if (helloBox.style.display === 'none') {
+          // Show the helloBox
+          helloBox.style.display = 'block';
+          hiBox.classList.add('yellowBackground');
+      } else {
+          // Hide the helloBox
+          helloBox.style.display = 'none';
+          hiBox.classList.remove('yellBackground');
+      }
+  }
+</script>
+</body>
+</html> 
+
+
+<!--
+  <!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: "Lato", sans-serif;
+  margin: 0;
+}
+
+.sidenav {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 60px;
+  transition: 0.5s;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.left-sidenav {
+  left: 0;
+}
+
+.right-sidenav {
+  right: 0;
+}
+
+.main {
+  transition: margin-left 0.5s, margin-right 0.5s;
+  padding: 16px;
+}
+
+.openbtn {
+  font-size: 30px;
+  cursor: pointer;
+  position: fixed;
+  z-index: 2;
+  top: 20px;
+}
+
+.left-openbtn {
+  left: 10px;
+}
+
+.right-openbtn {
+  right: 10px;
+}
+</style>
+</head>
+<body>
+
+<div id="leftSidenav" class="sidenav left-sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">About</a>
+  <a href="#">Services</a>
+  <a href="#">Clients</a>
+  <a href="#">Contact</a>
+</div>
+
+<div id="rightSidenav" class="sidenav right-sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="#">Profile</a>
+  <a href="#">Settings</a>
+  <a href="#">Logout</a>
+</div>
+
+<div class="main">
+  <span class="openbtn left-openbtn" onclick="openBothNav()">&#9776;</span>  
+  <h2>Main Content</h2>
+  <p>Click on the element above to open both side navigation menus.</p>
+</div>
+
+<script>
+function openBothNav() {
+  document.getElementById("leftSidenav").style.width = "250px";
+  document.getElementById("rightSidenav").style.width = "250px";
+  document.getElementsByClassName("main")[0].style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("leftSidenav").style.width = "0";
+  document.getElementById("rightSidenav").style.width = "0";
+  document.getElementsByClassName("main")[0].style.marginLeft = "0";
+}
+</script>
+
+</body>
+</html>
+<both side menu>
+
+
+
+message display and color changer
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Box Color and Message</title>
+    <style>
+        .box {
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+            cursor: pointer;
+        }
+        #message {
+            display: none;
+            color: black;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="box" id="myBox" style=" width: 100px;
+            height: 100px;
+            background-color: blue;
+            cursor: pointer;">Click me!</div>
+    <p id="message">Box clicked!</p>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const box = document.getElementById('myBox');
+            const message = document.getElementById('message');
+
+            // Function to handle box click
+            function handleBoxClick() {
+                // Toggle box color between blue and red
+                if (box.style.backgroundColor === 'blue') {
+                    box.style.backgroundColor = 'red';
+                      message.style.display = 'block';
+                } else {
+                    box.style.backgroundColor = 'blue';
+                      message.style.display = 'none';
+                }
+
+                // Toggle message display between 'none' and 'block'
+              
+            }
+
+            // Event listener for box click
+            box.addEventListener('click', handleBoxClick);
+        });
+    </script>
+</body>
+</html>
+
+-->

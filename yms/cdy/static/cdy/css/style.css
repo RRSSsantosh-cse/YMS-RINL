@@ -1,0 +1,70 @@
+*    /**/
+{
+    padding:0; 
+}
+body{                  /*background-image creation*/
+background-image:url();
+background-size:cover;
+background-position:center;
+box-sizing:border-box;
+}
+.menu-bar                          /* menu bar configuration*/
+{
+    background:green;
+    text-align:center;
+}
+.menu-bar ul             /*display of elements in menu bar*/
+{
+   display:inline-flex;
+   list-style:none;
+   color:green; 
+}
+.menu-bar ul li       /*spcaing betwen elements*/
+{
+  width:60px;
+  margin:5px;
+  padding:10px;  
+}
+.menu-bar ul li a 
+{
+    text-decoration:none ;
+    color:#fff;
+}
+.active ,.menu-bar ul li:hover 
+{
+ background:#2bab0d ;
+ border-radius:3px;   
+}
+.sub-menu
+{
+    display:none;
+}
+.menu-bar ul li:hover .sub-menu
+{
+  display:block; 
+  position:absolute;
+  background:rgb(0,100,0) ;
+  margin-top:15px;
+  margin-left:-2px ;  
+}
+.menu-bar ul li:hover .sub-menu ul 
+{
+    display:block ;
+    margin:10px;
+}
+.sub-menu-2
+{
+    display:none;
+}
+.hover-me:hover .sub-menu-2 
+{
+    position:absolute ;
+    display:block;
+    margin-top:-40px;
+    margin-left:140px ;
+    background:green;
+}
+
+
+
+

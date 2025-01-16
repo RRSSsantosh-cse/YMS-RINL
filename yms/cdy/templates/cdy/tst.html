@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+   .container{
+
+  border: 2px solid black;    
+  margin-right: 30%;
+  margin-left:30%;
+ }
+ .v{
+   margin-left:30%; 
+ } 
+</style>
+<body>
+    <div class="container">
+    {{q}}
+      <div class="v">
+    {% for l in k %}
+    <br>
+<table>
+<tr>
+    <td>{{forloop.counter}}</td>
+    {% if l.wname == f %}
+    
+<td style="background-color: #40E0D0;   ">{{l.wname}}</td>
+{% else %}
+<td>{{l.wname}}</td>
+{% endif %}
+</tr>
+
+{% endfor %}
+
+    </table>
+    </div>
+    </div>
+</body>
+</html>

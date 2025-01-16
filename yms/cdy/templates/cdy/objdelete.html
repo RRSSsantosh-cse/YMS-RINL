@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items</title>
+</head>
+<body>
+
+    <h1>Items</h1>
+
+    <ul>
+        {% for item in items %}
+        <li>
+            {{ item.nam }}
+            <button onclick="confirmDelete('{{ item.id }}', '{{ item.nam }}')">Delete</button>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        function confirmDelete(id, itemName) {
+            Swal.fire({
+                title: `Are you sure to delete ${itemName}?`, // Dynamically insert the item's name
+                
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'No, cancel!',
+                reverseButtons: true
+            }).then((result) => { 
+                if (result.isConfirmed) {
+                    Swal.fire('Success!', 'deleted', 'success');
+                    // Reload the page or update UI as needed
+                    setTimeout(function() {
+                        window.location.href = '/delete/' + id;
+                    }, 1000);
+                }
+            });
+        }
+    </script>
+    
+</body>
+</html>

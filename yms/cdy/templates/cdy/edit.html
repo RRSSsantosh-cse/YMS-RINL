@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{%static 'management/css/bootstrap.css'%}">
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+        </style>
+</head>
+<body>
+
+
+
+    <div class="container mt-5">
+        <a href="/" class="btn btn-info">Log Out</a>
+        <a class='btn btn-success pull-right' href="{% url 'index'%}"> 
+            BACK
+        </a>
+<h2 class="text-center alert alert-danger">function based view model of CRUD operations</h2>
+{% if st %}
+<table>
+    <tr>
+        <th>Name</th>
+      <th>Roll Number</th>
+      <th>Branch</th>
+    </tr>
+    {% for x in st %}
+    <tr>
+        <td>{{x.name}}</td>
+      <td><a href="/">{{x.number}}</a></td>
+      <td>{{x.branch}}</td>
+   
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+        <h4 class="text-center alert alert-warning">No records</h4>
+        {% endif %}
+    </div>
+    <script src="{%static 'management/js/jquery.js'%}" ></script>
+    <script src="{%static 'management/js/popper.js'%}" ></script>
+    <script src="{%static 'management/js/bootstrap.js'%}" ></script> 
+    
+</body>
+</html>
+     

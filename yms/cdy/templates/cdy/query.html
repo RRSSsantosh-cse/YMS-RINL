@@ -1,0 +1,477 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <style>
+      .bnt{
+        margin-top:20px;
+      }
+      .bnt button{
+        padding:10px 10px;
+      }
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drop down menu</title>
+    <style>
+    *    /**/
+      {
+          padding:0; 
+          margin:0 ;
+          box-sizing: border-box;
+      }
+      body{                  /*background-image creation*/
+      background-image:url();
+      background-size:cover;
+      background-position:center;
+      box-sizing:border-box;
+      }
+      .menu-bar                          /* menu bar configuration*/
+      {
+          background:green;
+          text-align:center;
+         
+      }
+      .menu-bar ul             /*display of elements in menu bar*/
+      {
+         display:flex;
+         list-style:none;
+         color:green; 
+      }
+      .menu-bar ul li       /*spcaing betwen elements*/
+      {
+        width:70px;
+        margin:10px;
+        
+       
+      }
+      li a {
+        font-size: 12px;
+      
+      }
+      .menu-bar ul li a 
+      {
+          text-decoration:none ;
+          color:#fff;
+  
+      }
+      .active ,.menu-bar ul li:hover 
+      {
+       background:red ;
+       border-radius:3px;  
+      }
+      .sub-menu
+      { 
+          display:none;
+      }
+      .menu-bar ul li:hover .sub-menu
+      {
+        display:block; 
+        position:absolute;
+        background:rgb(0,100,0) ;
+        margin-top:-40px;
+        margin-left:-15px ;  
+        
+      }
+      .menu-bar ul li:hover .sub-menu ul 
+      {
+          display:block ;
+          margin:5px;
+          }
+          .menu-bar ul li:hover .sub-menu ul li 
+      {
+       
+          width:120px ;
+          padding:5px;
+          }
+      .sub-menu-2
+      {
+          display:none;
+      
+
+        
+      }
+      .hover-me:hover .sub-menu-2 
+      {
+    
+          position:absolute ;
+          display:block;
+          margin-top:-60px;
+          margin-left:90px ;
+          background:green;
+          font-size:10px;
+
+      }
+      
+     
+      
+     
+      
+      </style>
+</head>
+<body>
+    <!--
+1)creation of list using div<ul><li></li></ul>
+2)under list create sub menu 
+Traffic Building,ULY-1,ULY-3,ULY-4,ULY-6,Weighting Bridge and Weighting Bridge 2
+
+    -->
+   <h1>YARD MANAGEMENT SYSTEM</h1>
+    <div class="menu-bar">
+    <ul>
+        <li class="k"></li>
+        <li><a href="#">Yard Map</a>
+        <div class="sub-menu">
+            <ul>
+               <li class="hover-me"><a href="#">Yard Map 2D</a>
+                <div class="sub-menu-2">
+                    <ul>
+                    <li><a href="#">CSPY East Block</a></li>
+                    <li><a href="#">CSPY West Block</a></li>
+                    <li><a href="#">Consignment</a></li>
+                    <li><a href="#">Kiosk</a></li>
+                    <li><a href="#">Kiosk-2</a></li>
+                    <li><a href="#">LY-1</a></li>
+                    <li><a href="#">LY-2</a></li>
+                    <li><a href="#">LY-3</a></li>
+                    <li><a href="#">LY-4</a></li>
+                    <li><a href="#">Parking</a></li>
+                    <li><a href="#">Reprocessing</a></li>
+                    <li><a href="#">Consignment</a></li>
+                    <li><a href="#">Traffic Building</a></li>
+                    <li><a href="#">ULY-1</a></li>
+                    <li><a href="#">ULY-3</a></li>
+                    <li><a href="#">ULY-4</a></li>
+                    <li><a href="#">ULY-6</a></li>
+                    <li><a href="#">Weighting Bridge</a></li>
+                    <li><a href="#">Weighting Bridge-2</a></li>
+              </ul>
+                </div>
+            
+            
+            
+            
+            
+            </li>
+            </ul>
+            </div></li>
+        <li><a href="#">Monitors</a>
+            <div class="sub-menu">
+                <ul>
+                    <li><a href="#">Yard Monitor</a>
+                        
+                 </li>
+            <li><a href="#">Rake Monitor</a>
+           
+        </li>
+        <li><a href="#">Hook Monitor</a></li>
+        <li><a href="#">DashBoard </a></li>
+    </ul>
+    </div>  
+       </li>
+        <li><a href="#">Rake Management</a></li>
+        <li><a href="#">Truck Manager</a></li>
+        <li><a href="#">Workorders</a>
+            <div class="sub-menu">
+                <ul>
+                   <li class="hover-me"><a href="#">WorkOrder Index</a>
+                   
+                    <div class="sub-menu-2">
+                        <ul>
+                        <li><a href="#"> My Workorder</a></li>
+                        <li><a href="#">Inbound via Hook</a></li>
+                        <li><a href="#">Inbound via Truck</a></li>
+                        <li><a href="#">Stock Verification</a></li>
+                        <li><a href="#">MaterialProcessing</a></li>
+                        <li><a href="#">Manual Workorder</a></li>
+                        <li><a href="#">Rake Dispatch</a></li>
+                        <li><a href="#">Rake Outbound</a></li>
+                        <li><a href="#">DirectDispatchbyRake</a></li>
+                        <li><a href="#">Truck Dispatch</a></li>
+                        <li><a href="#">Truck Outbound</a></li>
+                        <li><a href="#">DirectDispatchbyTruck</a></li>
+                        <li><a href="#">Traffic Building</a></li>
+                        <li><a href="#">CurrentWorkorders</a></li>
+                        <li><a href="#">FinishedWorkorders</a></li>
+                        <li><a href="#">CancelledWorkorders</a></li>
+                        
+                  </ul>
+                    </div>
+                
+                
+                
+                </li>
+                </ul>
+               
+                    <ul>
+
+                       <li class="hover-me"><a href="#">WorkOrder Manager</a>
+                        <div class="sub-menu-2">
+                          <ul>
+                          <li><a href="#">Hook Unload</a></li>
+                          <li><a href="#">Rake Dispatch</a></li>
+                          <li><a href="#">others</a></li>
+                        </ul>
+                        </div>
+                       </li>
+                    </ul>
+                   
+                        <ul>
+                           <li><a href="#">Manual Workorder</a></li>
+                        </ul>
+                      
+                            <ul>
+                               <li><a href="#">New Manual Workorder</a></li>
+                            </ul>
+                           
+                              
+                                </div>
+        
+        
+        
+        
+        
+        </li>
+        <li><a href="#">Search</a></li>
+        <li><a href="#">Manual Updates</a></li>
+        <li><a href="#">Reports</a>
+        <div class="sub-menu">
+            <ul>
+               <li class="hover-me"><a href="#">Miscellenous</a>
+              <div class="sub-menu-2">
+           
+                    <ul>
+                    <li><a href="#">dispatch truck history</a></li>
+                    <li><a href="#">rake plan received</a></li>
+                    <li><a href="#">f-note report history</a></li>
+                    <li><a href="#">pre rake out</a></li>
+                    <li><a href="#">pre rake out verification</a></li>
+                    <li><a href="#">rakes challan gross weightment report</a></li>
+                    <li><a href="#">material processing report</a></li>
+                    <li><a href="#">indent dispatched  through yms</a></li>
+                    <li><a href="#">pre raked out vsloaded</a></li>
+                    <li><a href="#">Parking</a></li>
+                    <li><a href="#">dispatch rake verification</a></li>
+                    <li><a href="#">hold wagon history report </a></li>
+            
+              </ul>
+                </div>
+              
+              
+              
+              </li>
+            </ul>
+          
+                 <ul>
+                   <li class="hover-me"><a href="#">Work Orders</a>
+                    <div class="sub-menu-2">
+           
+                      <ul>
+                      <li><a href="#">hook workorders</a></li>
+                      <li><a href="#">rake plan workorders</a></li>
+                      <li><a href="#">finsihed workorders detail</a></li>
+                      <li><a href="#">cancelled workorders</a></li>
+                    
+              
+                </ul>
+                  </div>
+                  
+                  
+                  
+                  
+                  
+                  </li>
+                </ul>
+              
+                    <ul>
+                       <li class="hover-me"><a href="#">Interface Reports</a>
+                        <div class="sub-menu-2">
+           
+                          <ul>
+                          <li><a href="#">hook recieved history</a></li>
+                          <li><a href="#">captive truck received history</a></li>
+                          <li><a href="#">rake plan received history</a></li>
+                          <li><a href="#">truck plan received history</a></li>
+                          <li><a href="#">rake dispatch history report</a></li>
+                          <li><a href="#">rake dispatch material report history</a></li>
+                          <li><a href="#">text report history</a></li>
+                          <li><a href="#">stock verification received history</a></li>
+                          <li><a href="#">stock verification sent history </a></li>
+                          <li><a href="#">material wise weight information from erp </a></li>
+                       
+                  
+                    </ul>
+                      </div>
+                      
+                      
+                      
+                      
+                      </li>
+                    </ul>
+                  
+                        <ul>
+                           <li class="hover-me"><a href="#">Yard Reports</a>
+                            <div class="sub-menu-2">
+                            <ul>
+                              <li><a href="#">location history</a></li>
+                              <li><a href="#">layer wise report</a></li>
+                              <li><a href="#">stock yard stock</a></li>
+                              <li><a href="#">staged yard stock </a></li>
+                              <li><a href="#">material coe wise bins report </a></li>
+                             
+                            
+                      
+                        </ul>
+                      </div>
+                      </li>
+                        </ul>
+                       
+                            <ul>
+                               <li><a href="#">Material and Movements</a></li>
+                            </ul>
+                            </div>
+                        </li>
+        <li><a href="#">Configuration</a>
+            <div class="sub-menu">
+                <ul>
+                   <li><a href="#">Sync Material Weight</a></li>
+                </ul>
+                
+                
+                    <ul>
+                       <li><a href="#">Update Device Information</a></li>
+                    </ul>
+                   
+                    
+                        <ul>
+                           <li><a href="#">Material Management</a></li>
+                        </ul>
+                      
+                        
+                            <ul>
+                               <li><a href="#">Bin Configuration</a></li>
+                            </ul>
+                          
+                            
+                                <ul>
+                                   <li><a href="#">GPS Configuration</a></li>
+                                </ul>
+                               
+                                    <ul>
+                                       <li><a href="#">Update General Configuration</a></li>
+                                    </ul>
+                                 
+                                    
+                                        <ul>
+                                           <li><a href="#">Announcement Configuration</a></li>
+                                        </ul>
+                                        
+                                       
+                                            <ul>
+                                               <li><a href="#">User Configuration</a></li>
+                                            </ul>
+                                        
+                                         
+                                                <ul>
+                                                   <li><a href="#">Update Authority</a></li>
+                                                </ul>
+                                              
+                                                    <ul>
+                                                       <li><a href="#">Update Report Authority</a></li>
+                                                    </ul>
+                                                  
+                                                    
+                                                        <ul>
+                                                           <li><a href="#">User Defined Vehicle Name</a></li>
+                                                        </ul>
+                                                        </div>
+        </li>
+    </ul>
+</div>
+<div class="bnt">
+<button>Hooks</button>
+<button>Rakes</button>
+</div>
+<br>
+{%if f %}
+<table>
+    <tr>
+      <th>PlatForm</th>
+      <th>Hook No</th>
+      <th>Status</th>
+      <th>Wagon Count</th>
+      <th>Hook In</th>
+      <th>Regenerate WorkOrder</th>
+      <th>Unloading Completed</th>
+      <th>Hook Out</th>
+    </tr>
+    {%for k in f %}
+    <tr>
+      <td>{{k.platform}}</td>
+      <td><a href="{%url 'index' k.id %}">{{k.h_number}}</a></td>
+      <td>{{k.Status}}</td>
+      <td>{{k.count}}</td>
+      <td ><a href="" style="text-decoration:none;">Hook in</a></td>
+      <td><a href="">Regenerate Order</a></td>
+      <td><a href="">Unloading Order</a></td>
+      <td><a href="">Hook out</a></td>
+      
+    </tr>
+    {% endfor %}
+    {% else %}
+    <h4>No records</h4>
+    {% endif %}
+   
+  <br>
+  <br>
+  <br>
+  {% if k %}
+  <h3>Wagon details of</h3>
+  <table>
+    <tr>
+      <th>Sequence</th>
+      <th>Wagon Name</th>
+      <th>Material Code</th>
+      <th>Material Desc</th>
+      <th>Actual Weight(Mt)</th>
+      <th>Status</th>
+      <th>Work Orders</th>
+      <th>Hold Status</th>
+      <th>View Materials</th>
+      <th>From ERP</th>
+    </tr>
+
+    {% for x in k %}
+    <tr>
+      <td>{{x.w_name}}</td>
+      <td>{{x.code}}</td>
+      <td>{{x.desc}}</td>
+      <td>{{x.weight}}</td>
+      <td>{{x.Status}}</td>
+      <td><a href="">Hold</a></td>
+      <td><a href="">View</a></td>
+      <td>N/A</td>
+    </tr>
+   {% endfor %}
+  </table>
+  {%else%}
+  {% endif %}
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!--this is the page which is used for generating reports-->
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+
+</style>
+</head>
+<body>
+
+<h2>HTML Table</h2>
+
+<table>
+  <tr>
+    <th>DDGP No</th>
+    <th>DDGP Item No</th>
+    <th>Truck</th>
+    <th>Customer Code</th>
+    <th>DDGP Quantity</th>
+    <th>Material Code</th>
+    <th>Material Description</th>
+    <th>Heat-Code-[No of Materials]</th>
+    <th>Loaded Materials-[Heat-Code]</th>
+    <th>Challan No</th>
+    <th>Caluclated Weight</th>
+    <th>Actual Weight</th>
+    <th>Loaded Time</th>
+    <th>Dispatch Time</th>
+  </tr>
+  <tr>
+<td>5023093792</td>
+<td>000010</td>
+<td>AP39TB2646</td>
+<td>0009000013</td>
+<td>37.0</td>
+<td>161200012800701</td>
+<td>TMT REBAR IN COIL 12MM IS 1786 FE550</td>
+<td>231469-[2]<br>2314960-[6]<br>2314979-[2]<br>2314988-[1]<br>231585-[3]<br>2315188-[12]<br>2315191-[3]</td>
+<td>16C003153769-[2314988]<br>16C0003154888-[2314979]<br>16C0003154893-[2314979]<br>16C0003154974-[2314960]<br>16C0003154975-[2314960]<br>16C0003154982-[2314960]<br>16C0003154987-[2314960]<br>16C0003154997-[2314960]<br>16C0003154992-[2314960]<br>16C000315014-[2314960]<br></td>
+<td>111742</td>
+<td>35.119</td>
+<td>34.0</td>
+<td>08/03/2024 2.50.52</td>
+<td>08/03/2024 4.27.06</td>
+</tr>
+<tr>
+  <td>5024003328</td>
+  <td>000020</td>
+  <td>AP39TE4643</td>
+  <td>009026097</td>
+  <td>28.0</td>
+  <td>16120001080072</td>
+  <td>TMT REBAR IN COIL 12MM IS 1786 FE550D ST</td>
+  <td>2316354-[2]<br>2316393-[13]<br>2314979-[5]<br>2400211-[3]</td>
+  <td>16C003218672-[2400211]<br>16C0003218692-[2400211]<br>16C0003223670-[2316354]<br>16C0003154974-[2316354]<br><br>16C0003154982-[2314960]<br>16C0003154987-[2314960]<br>16C0003154997-[2314960]<br>16C0003154992-[2314960]<br>16C000315014-[2314960]<br></td>
+  <td>128143</td>
+  <td>26.642</td>
+  <td>27.0</td>
+  <td>13/04/2024 9.59.44</td> <!--workorder finihs time-->
+  <td>13/04/2024 16.27.22</td> <!--send for weighting time -->
+  </tr>
+  <tr>  <!--results of  truck dispatch  and detail info gives about heat id-->
+    <td>5024003328</td>
+    <td>000020</td>
+    <td>AP39TE4643</td>
+    <td>009026097</td>
+    <td>28.0</td>
+    <td>16120001080072</td>
+    <td>TMT REBAR IN COIL 12MM IS 1786 FE550D ST</td>
+    <td>240267-[1]</td>
+    <td>15M20000276467-[2400467]</td>
+    <td>128411</td>
+    <td>5.95</td>
+    <td>5.0</td>
+    <td>13/04/2024 9.59.44</td> <!--workorder finihs time-->
+    <td>13/04/2024 16.27.22</td> <!--send for weighting time -->
+    </tr>
+  <tr>
+    <td>Island Trading</td>
+    <td>Helen Bennett</td>
+    <td>UK</td>
+  </tr>
+  <tr>
+    <td>Laughing Bacchus Winecellars</td>
+    <td>Yoshi Tannamuri</td>
+    <td>Canada</td>
+  </tr>
+  <tr>
+    <td>Magazzini Alimentari Riuniti</td>
+    <td>Giovanni Rovelli</td>
+    <td>Italy</td>
+  </tr>
+</table>
+
+</body>
+</html>
+<!-- DISPATCH TRUCK HISTORY
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    body{background-color:gray;}
+    .container{position:absolute;top:20%;left:10%;background-color:white;height:60%;width:70%;}
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h4 style="margin:15px;text-align:center;background-color:gray;">Truck Dispatch History</h4>
+    <form style="margin-top:30px;">
+    Truck Plan Time From  From<select name="cars" id="cars">
+  <option value="Equal To">Equal To</option>
+  <option value="Less Than">Less Than</option>
+    <option value="Greater Than">Greater Than</option>
+  <option value="Less Than Equal To">Less Than Equal To</option>
+    <option value="Greater Than Equal To">Greater Than Equal To </option>
+  <option value="Between">Between</option>
+    <option value="Like">Like</option>
+ 
+
+</select><input type="date"><br><br>
+    Truck Plan Time To<select name="cars" id="cars">
+  <option value="Equal To">Equal To</option>
+  <option value="Less Than">Less Than</option>
+    <option value="Greater Than">Greater Than</option>
+  <option value="Less Than Equal To">Less Than Equal To</option>
+    <option value="Greater Than Equal To">Greater Than Equal To </option>
+  <option value="Between">Between</option>
+    <option value="Like">Like</option>
+ 
+
+</select><input type="text"><br>
+
+     <input type="submit" value="Submit">
+    </form>
+    </div>
+</body>
+</html>
+
+
+
+-->

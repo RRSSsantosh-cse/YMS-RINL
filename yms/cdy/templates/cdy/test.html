@@ -1,0 +1,487 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible"
+		content="IE=edge">
+	<meta name="viewport"
+		content="width=device-width, 
+				initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+	<style>
+		.box {
+			background-color:white;
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		p {
+			font-size: 17px;
+			align-items: center;
+		}
+
+		.box a {
+			display: inline-block;
+			background-color: #fff;
+			padding: 15px;
+			border-radius: 3px;
+		}
+
+		.modal {
+			align-items: center;
+			display: flex;
+			justify-content: center;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background:white;
+			transition: all 0.4s;
+			visibility: visible;
+			opacity: 1;
+		}
+
+    .modal-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            max-width: 80%;
+            text-align: center;
+        }
+		.content {
+			margin-right:30px;
+            margin-top:250px;
+    
+    background-color:#c3c4c7;
+		}
+
+		
+		.box-close {
+			
+			padding:10px;
+			color:blue;
+			text-decoration: none;
+			font-size: 20px;
+            margin-right: 30px;
+            margin: 20px;
+           
+            background-color: pink;
+            border-radius: 50px;
+		}
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        th{background-color:green}
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 6px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd ;
+          
+        }
+        table.y {
+            width:50%;
+            font-size:16px;
+        
+            border-collapse:none;
+            font-family:"times-new-roman" ;
+        }
+        td.z{
+           padding:20px;    
+           border:0;
+        text-align: left;
+           font-size:16px;
+          
+        }
+        td.z1 {
+            padding:5px 5px;    
+           border:0;
+        text-align: left;
+           font-size:10px;
+           
+        }
+        .btn
+        {
+           display:grid;
+           justify-items: end; 
+           
+        }
+        .btn span,input {
+            padding:4px;    
+        }
+         b{
+            text-indent:30px;
+        }
+        .frm{ background-color: blue;
+          width:500px;
+     padding:10px;}
+        
+  td.z2{position:relative;border: 2px solid blue;
+          width:30%  ;
+     padding:10px;
+    margin-top:20px;}
+  .x{display:flex;justify-content:space-between;margin-top:30px;}
+        .frm p{font-size:18px; }
+        .pp {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+    }
+    .over {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    .mod {
+            display: none; /* Initially hidden */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5); /* Semi-transparent background */
+            overflow: auto;
+            justify-content: center;
+            align-items: center;
+            display: flex;
+        }
+  </style>
+</head>
+
+<body>
+ 
+	<div class="box">
+		<a href="#popup-box">
+			Click to Open Popup Box !
+		</a>
+	</div>
+	<div id="popup-box" class="modal">
+		<div class="content">
+      <div class="x">
+      <h3>WORKORDER DETAILS {{l}}</h3>
+      <i class="material-icons" style="margin-left:350px;" onclick="g()">&#xe872;</i>     
+			<div class="btn">
+      
+
+                <span>
+                 
+                    <a href="/home" class="box-close">
+                        ×
+                    </a>
+                 </span>
+                  <br>
+                </div>
+                </div>
+                
+<div class="over" id="over" onclick="clse()"></div>
+<div class="pp" id="pp">
+  <h2>Reason for Deletion of workorder {{l}}</h2>
+  <form id="myf" action="POST">
+      <label for="name">Reason:</label><br>
+      <input type="text" id="name{{l}}" name="name{{l}}" required style="padding:20px 20px;margin-bottom:20px;"><br>
+
+      <button type="submit" onclick="klub()">Submit</button>
+  </form>
+</div>
+<script>
+  // Function to open the pop-up
+  function klub(){
+
+alert("{{y}}");
+
+
+  }
+  function g() {
+      document.getElementById("pp").style.display = "block";
+      document.getElementById("over").style.display = "block";
+  }
+
+  // Function to close the pop-up
+  function clse() {
+      document.getElementById("pp").style.display = "none";
+      document.getElementById("over").style.display = "none";
+  }
+</script>
+              
+            <table class="y">
+              {% for k in y %}
+                <tr>
+                  <td class="z">Workorder: <b>{{k.od}}</b></td>
+                  <td class="z"></td>
+                 
+                  <td class="z">Generatedtime:<b>{{k.dt.date}},<b>{{k.dt.hour}}:{{k.dt.minute}}:{{k.dt.second}}</b></b></td>
+                  <td class="z"></td>
+                  
+                  <td class="z">{{k.ct}}</td>
+                  </tr>
+                  
+                  <tr>
+                    <td class="z">Source:<b>{{k.sour}}</b></td>
+                    <td class="z"></td>
+                  
+                    <td class="z">Drop Bin:<b>{{k.bi}}</b></td>
+                    <td class="z"></td>
+                  
+                    <td class="z">Drop Zone:<b>{{k.zone}}</b></td>
+                    </tr>
+                    <tr>
+                        <td class="z">AssignedTruck:<b>{{k.truck}}</b></td>
+                       
+                  <td class="z"></td>
+                        <td class="z">Assigned By:<b>{{k.asign}}</b></td>
+                        
+                  <td class="z"></td>
+                        <td class="z">CaluclatedWeight(Mt):<b>{{k.weight}}</b></td>
+                        </tr>
+                        <tr>
+                         
+                          <td class="z2">{{k.tp}}:<br>
+                            {% for key, value_set in l1.items %}
+                            {% for value in value_set %}
+                                {{ value.0 }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                           .
+                        {% endfor %}
+                        
+
+                        </tr>
+                  
+                        <tr><td class="z">BINS:<span><b> {{k.bns}}</b></span></td></tr>
+                  </table>
+                  <div class="btn">
+                  <input type="text" placeholder="Search.."></div>
+                  <br><br><br>
+            <!--
+            <div class="side">
+                <p>Workorder:<b>93268</b></p>
+                <p>Generated time:<b>30/1/2023/6.48.33</b></p>
+                <p>INBOUNDVIAHOOK</p>
+                    </div>
+            <div class="side">
+                <p>Source:<b>091</b></p>
+                <p>Drop Bin:<b>E113</b></p>
+                <p>Drop Zone:<b>CSPY East Block</b></p>
+                    </div>
+                    <div class="side">
+                        <p>Assigned Truck:<b>AP16TG2619</b></p>
+                        <p>Assigned By:<b></b>SYSTEM</p>
+                        <p>Caluclated Weight(Mt):<b>26.642</b></p>
+                    </div>
+                -->
+                {% endfor %}
+                    <table class="x">
+                        <tr>
+                          <th>Type</th>
+                          <th>Plan Location</th>
+                          <th>Actual Location</th>
+                          <th>Count-Weight</th>
+                          <th>Material-Code</th>
+                          <th>Material Desc</th>
+                          <th>Status</th>
+                          <th>Action</th>
+                        </tr>
+                        {% for z in k4 %}
+                   
+                        <tr>
+                      
+                          <td>PICK</td>
+                          <td>{{z.lstart}}</td>
+                          <td>N/A</td>
+                          <td>{{z.c1}}<br>{{z.c2}}</td>
+                          {% for k in y %}
+                          <td>{{k.mcode}}</td>
+                          {% endfor %}
+                          <td></td>
+                        {% if z.stat == 0 %}
+                          <td>N/A</td>
+                          {% elif z.stat == 1 %}
+                          <td>In Progress</td>
+                          {% elif z.stat == 3 %}
+                          <td style="color:green;">Finished</td>
+                          {% endif %}
+                          <td>N/A</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <a onclick="modale('{{ z }}', '{{ z.lend }}')">DROP</a>
+                          <!--
+                            {% for k,l in lk.items %}
+                            {% if k == z %}
+                            {% if l %}
+                            {% if l.stat == 1 %}
+                            <a onclick=al()>DROP</a>
+                            {% else %}
+                           
+                            {% endif %}
+                            {% else %}
+                            <a onclick="modale('{{z}}')">DROP</a>
+                            {% endif %}
+                            {% endif %}
+                            {% endfor %}
+                          -->
+                            <!-- Background overlay element -->
+                            <div id="over{{z}}" onclick="clseq('{{z}}')"
+                                 style="display: none;
+                                        position: fixed;
+                                        top: 0;
+                                        left: 0;
+                                        width: 100%;
+                                        height: 100%;
+                                        background-color: rgba(0, 0, 0, 0.5);
+                                        z-index: 999;"></div>
+                            
+                            <!-- Pop-up form -->
+                            <div class="pp" id="pp{{z}}" style="display: none;">
+                              
+                                <form>
+                                    <label for="name">Drop Bin</label><br>
+                                    <input  type='text'id="nameq{{z}}" name="nameq{{z}}" value="12"  style="margin-bottom: 20px; padding: 0;" readonly><br>
+                                    <label for="name">Drop Zone</label><br>
+                                    <input type="text" id="namq{{z}}" name="namq{{z}}" value="13" style="margin-bottom: 20px; padding: 0;" readonly><br>
+                                    <button onclick="confirmAction(event,`{{z.id}}`)">Submit</button>
+                                
+                                  </form>
+                            </div>
+                            
+                            <script>
+                              function al(){alert("Previous Not completed")}
+                                // Function to display the modal and overlay
+                                function modale(z,k) {
+                                
+                                    document.getElementById("over" + z).style.display = "block";
+                                    document.getElementById("pp" + z).style.display = "block";
+                                
+                                   document.getElementById('nameq'+z).value=k.split('-')[0]
+                                   document.getElementById('namq'+z).value=k.split('-')[1]
+                                  }
+                            
+                                // Function to close the modal and overlay
+                                function clseq(z) {
+                                  
+                                    var overlay = document.getElementById("over" + z);
+                                    var modal = document.getElementById("pp" + z);
+                            
+                                    // Check if the clicked element is the overlay itself
+                                    if (event.target === overlay) {
+                                        modal.style.display = "none";
+                                        overlay.style.display = "none";
+                                    }
+                                }
+                             
+    
+      
+                            </script>
+                           
+                              </td>
+                          <td>{{z.lend}}</td>
+                          <td>N/A</td>
+                          <td>{{z.c1}}<br>{{z.c2}}</td>
+                    
+                          {% for k in y %}
+                          <td>{{k.mcode}}</td>
+                          {% endfor %}
+                          <td></td>
+                          {% if z.stat == 0 %}
+                          <td>N/A</td>
+                          {% elif z.stat == 1 %}
+                          <td></td>
+                          {% elif z.stat == 3 %}
+                          <td style="color:green;">Finished</td>
+                          {% endif %}
+                        
+                        </tr>
+                       {% endfor %}
+                      </table>
+                     
+		</div>
+	</div>
+  <script>   
+ function confirmAction(event,id) {
+  event.preventDefault();
+    Swal.fire({
+        title: `Are you sure to Drop all materials?`, // Dynamically insert the item's name
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        reverseButtons: true,
+    
+        timerProgressBar: true // Display a progress bar indicating the remaining time
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire('Success!', 'Action confirmed.', 'success');
+            setTimeout(() => {
+                        window.location.href = 'drop/'+id; // Replace with your desired URL
+                    }, 3000); // Redirect after 3 seconds (3000 milliseconds)
+            // Perform your action here after confirmation
+        } else {
+            Swal.fire('Cancelled', 'Action cancelled.', 'error');
+            // Handle cancellation or do nothing
+        }
+    });
+}
+function fin(event,id) {
+  event.preventDefault();
+    Swal.fire({
+        title: `  Do you want to finish this?`, // Dynamically insert the item's name
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No',
+        reverseButtons: true,
+    
+        timerProgressBar: true // Display a progress bar indicating the remaining time
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire('Success!', 'Finished', 'success');
+            setTimeout(() => {
+                        window.location.href = 'finished/'+id; // Replace with your desired URL
+                    }, 3000); // Redirect after 3 seconds (3000 milliseconds)
+            // Perform your action here after confirmation
+        } else {
+            Swal.fire('Cancelled', 'Action cancelled.', 'error');
+            // Handle cancellation or do nothing
+        }
+    });
+}
+  </script>  
+
+  
+
+   
+
+   
+   
+</body>
+
+</html>

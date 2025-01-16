@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+           padding : 0;
+           margin:0; 
+        }
+      
+        .mapcontainer {
+            width: 1843px;
+        height: 1167px;
+        background-color: black;
+        position: absolute;
+        left: 0;
+        top: 2px;
+        transform-origin: top left; /* Set transform origin to top left */
+        scale:0.5; /* Initial scale */
+        }
+        #scaleDisplay {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 5px;
+            background-color: blue;
+            color: white;
+            font-size: 14px;
+        }
+        #W001 {
+            position: absolute;
+            top: 280px;
+            left: 80px;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            
+            
+            font-size: 8px;
+        }
+        #W002 {
+            position: absolute;
+            top: 260px;
+            left: 200px;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            
+            
+            font-size: 8px;
+        }
+        #W003 {
+            position: absolute;
+            top: 340px;
+            left: 80px;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            
+            
+            font-size: 8px;
+        }
+        #W004 {
+            position: absolute;
+            top: 320px;
+            left: 200px;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            
+            
+            font-size: 8px;
+        }
+        #W005{
+            position: absolute;
+            top: 390px;
+            left: 100px;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            
+            
+            font-size: 8px;
+        }
+        #W006 {
+            position: absolute;
+            top: 380px;
+            left: 200px;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            
+            
+            font-size: 8px;
+        }
+        #W007 {
+            position: absolute;
+            top: 440px;
+            left: 110px;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            
+            
+            font-size: 8px;
+        }
+        #W008 {
+            position: absolute;
+            top: 430px;
+            left: 200px;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            
+            
+            font-size: 8px;
+        }
+        #W009 {
+            position: absolute;
+            top: 220px;
+            left: 382px;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            
+            
+            font-size: 8px;
+        }
+        #W010 {
+            position: absolute;
+            top: 200px;
+            left: 520px;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            
+            
+            font-size: 8px;
+        }
+        #W011 {
+            position: absolute;
+            top: 270px;
+            left: 400px;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            
+            
+            font-size: 8px;
+        }
+        #W012 {
+            position: absolute;
+            top: 260px;
+            left: 520px;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            
+            
+            font-size: 8px;
+        }
+        #W013{
+            position: absolute;
+            top: 320px;
+            left: 400px;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            
+            
+            font-size: 8px;
+        }
+        #W014 {
+            position: absolute;
+            top: 320px;
+            left: 520px;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            
+            
+            font-size: 8px;
+        }
+        #W015{
+            position: absolute;
+            top: 380px;
+            left: 400px;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            
+            
+            font-size: 8px;
+        }
+        #W016 {
+            position: absolute;
+            top: 380px;
+            left: 520px;
+            width: 15px;
+            height: 15px;
+            background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            
+            
+            font-size: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="maincontainer"style="width:2133px;left:0;height:988px;background-color:red;">
+        <div class="mapcontainer" id="mapcontainer"style="width:1843px;top:1px;transform:rotateZ(0deg);height:1167px;background-color:black; background-size: 100% 100%;" onmousemove="coordinate(event)">
+          
+            <div id="W001">
+                W001
+            </div>
+            <div id="W002">
+                W002
+            </div>
+            <div id="W003">
+                W003
+            </div>
+            <div id="W004">
+                W004
+            </div>
+            <div id="W005">
+                W005
+            </div>
+            <div id="W006">
+                W006
+            </div>
+            <div id="W007">
+                W007
+            </div>
+            <div id="W008">
+                W008
+            </div>
+            <div id="W009">
+                W009
+            </div>
+            <div id="W010">
+                W010
+            </div>
+            <div id="W011">
+                W011
+            </div>
+            <div id="W012">
+                W012
+            </div>
+            <div id="W013">
+                W013
+            </div>
+            <div id="W014">
+                W014
+            </div>
+            <div id="W015">
+                W015
+            </div>
+            <div id="W016">
+                W016
+            </div>
+
+
+
+            <div class="target1" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:37px;height:2px;left:444px;top:782px;transform:rotateZ(-54.0811deg);"></div>
+         <div class="target2" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:10.257px;height:2px;left:473px;top:770.248px;transform:rotateZ(33.772deg);"></div>
+         <div class="target3" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:37.2588px;height:2px;left:453px;top:788.004px;transform:rotateZ(-54.0684deg);"></div>
+         <div class="target4" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:10px;height:2px;left:451px;top:800.248px;transform:rotateZ(33.629deg);"></div>
+         <div class="targetname" style=" color:white;position:absolute;cursor:default;z-index:5;width:37px;height:2px;left:449px;top:778.64px;font-size:9px;left:449px;">Reprocessing</div>
+         <div class="targetname" style=" color:white;position:absolute;cursor:default;z-index:5;width:37px;height:2px;left:449px;top:790.64px;font-size:9px;left:451px;">Kiosk</div>
+         <div class="target5" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:290px;height:2px;left:363px;top:188px;transform:rotateZ(-12deg);"></div>
+         <div class="target6" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:238px;height:2px;left:555px;top:274px;transform:rotateZ(78.3854deg);"></div>
+         <div class="target7" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:588px;height:2px;left:117px;top:454px;transform:rotateZ(-12deg);"></div>
+         <div class="target8" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:195px;height:2px;left:-10px;top:426px;transform:rotateZ(67deg);"></div>
+         <div class="target9" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:52px;height:2px;left:26px;top:310px;transform:rotateZ(-85deg);"></div>
+         <div class="target10" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:194px;height:2px;left:51px;top:264px;transform:rotateZ(-12deg);"></div>
+         <div class="target11" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:42px;height:2px;left:226px;top:265.248px;transform:rotateZ(78deg);"></div>    
+         <div class="target12" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:126px;height:2px;left:250px;top:273.248px;transform:rotateZ(-12deg);"></div>
+         <div class="target13" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:43px;height:2px;left:350px;top:238px;transform:rotateZ(78deg);"></div>
+        <div class="targetname" style="position:absolute;border:1px;cursor:default;z-index:5;color:red;width:77px;height:2px;left:28px;top:330px; font-size:8px;" >CSPY West Block</div>
+        <div class="target14" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:38px;height:2px;left:343px;top:490px;transform:rotateZ(-11deg);"></div>
+        <div class="target15" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:11px;height:2px;left:377px;top:492px;transform:rotateZ(77.6deg);"></div>
+        <div class="target15" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:38px;height:2px;left:345px;top:500px;transform:rotateZ(-10deg);"></div>
+        <div class="target15" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:10px;height:2px;left:377px;top:492px;transform:rotateZ(77.6deg);"></div>
+        <div class="target16" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:11px;height:2px;left:339px;top:499px;transform:rotateZ(77.6deg);"></div>
+        <div class="targetname" style="position:absolute;border:1px;cursor:default;z-index:5;color:red;width:39px;height:2px;left:343px;top:495px;font-size:7px;">Kiosk</div>
+      <div class="target17" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:374px;height:2px;left:144px;top:623px;transform:rotateZ(-54deg);"></div>
+      <div class="target18" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:111px;height:2px;left:439px;top:461px;transform:rotateZ(-11deg);"></div>
+      <div class="target19" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:107px;height:2px;left:539px;top:482px;transform:rotateZ(37.6deg);"></div>
+      <div class="target20" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:437px;height:2px;left:290px;top:692px;transform:rotateZ(-54deg);"></div>
+      <div class="target21" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:128px;height:2px;left:253px;top:871px;transform:rotateZ(-1deg);"></div>
+      <div class="target22" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:102px;height:2px;left:186px;top:824px;transform:rotateZ(72deg);"></div>   
+      <div class="targetname" style="position:absolute;border:1px;cursor:default;z-index:5;color:red;width:437px;height:2px;left:409px;top:648px;font-size:7px;">Cspy East Block</div>
+      <div class="target23" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:163px;height:2px;left:172px;top:590px;transform:rotateZ(64deg);"></div>
+      <div class="target24" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:203px;height:2px;left:247px;top:583px;transform:rotateZ(-54deg);"></div>
+      <div class="target25" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:21px;height:2px;left:393px;top:491px;transform:rotateZ(74deg);"></div>
+      <div class="target26" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:21px;height:2px;left:380px;top:483px;transform:rotateZ(-21deg);"></div>
+      <div class="target27" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:126px;height:2px;left:217px;top:505px;transform:rotateZ(-10deg);"></div>
+      <div class="targetname" style="position:absolute;border:1px;cursor:default;z-index:5;color:red;width:202px;height:2px;left:280px;top:550px;font-size:7px;">Consignment</div>
+      <div class="target28" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:77px;height:2px;left:134px;top:528px;transform:rotateZ(-15deg);"></div>
+      <div class="target29" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:170px;height:2px;left:163px;top:596px;transform:rotateZ(64deg);"></div>
+      <div class="target30" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:101px;height:2px;left:200px;top:710px;transform:rotateZ(-50deg);"></div>
+      <div class="target31" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:226px;height:2px;left:64px;top:643px;transform:rotateZ(68deg);"></div>
+      <div class="targetname" style="position:absolute;border:1px;cursor:default;z-index:5;color:red;width:227px;height:2px;left:199px;top:610px;font-size:7px;">Traffic Building</div>
+      <div class="target32" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:146px;height:2px;left:562px;top:431px;transform:rotateZ(-11deg);"></div>
+      <div class="target33" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:108px;height:2px;left:623px;top:462px;transform:rotateZ(-55deg);"></div>
+      <div class="target34" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:102px;height:2px;left:554px;top:476px;transform:rotateZ(36deg);"></div>
+      <div class="targetname" style="position:absolute;border:1px;cursor:default;z-index:5;color:red;width:146px;height:2px;left:617px;top:459px;font-size:7px;">Weight Bridge</div>
+      <div class="target35" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:39px;height:2px;left:3px;top:696px;transform:rotateZ(-4deg);"></div>
+      <div class="target36" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:397px;height:2px;left:-156px;top:894px;transform:rotateZ(90deg);"></div>
+      <div class="target37" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:39px;height:2px;left:3px;top:1092px;transform:rotateZ(1deg);"></div>
+      <div class="target38" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:394px;height:2px;left:-193px;top:895px;transform:rotateZ(-90deg);"></div>
+      <div class="targetname" style="position:absolute;border:1px;cursor:default;z-index:5;color:red;width:397px;height:2px;left:10px;top:891px;font-size:7px;">ULY-1</div>
+      <div class="target39" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:14px;height:2px;left:61px;top:693px;transform:rotateZ(-7deg);"></div>
+      <div class="target40" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:398px;height:2px;left:-145px;top:893px;transform:rotateZ(-88deg);"></div>
+      <div class="target41" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:13px;height:2px;left:46px;top:1092px;transform:rotateZ(6deg);"></div>
+      <div class="target42" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:400px;height:2px;left:-133px;top:893px;transform:rotateZ(-88deg);"></div>
+      <div class="targetname" style="position:absolute;border:1px;cursor:default;z-index:5;color:white;width:407px;height:2px;left:53px;top:891px;font-size:7px;">ULY-3</div>
+      <div class="target43" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:12px;height:2px;left:190px;top:1089px;transform:rotateZ(4deg);"></div>
+      <div class="target44" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:403px;height:2px;left:-45px;top:890px;transform:rotateZ(80deg);"></div>
+      
+      <div class="target45" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:16px;height:2px;left:130px;top:688px;transform:rotateZ(5deg);"></div>
+      <div class="target46" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:409px;height:2px;left:-22px;top:890px;transform:rotateZ(80deg);"></div>
+      <div class="target47" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:12px;height:2px;left:206px;top:1090px;transform:rotateZ(15deg);"></div>
+      <div class="target48" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:409px;height:2px;left:-36px;top:886px;transform:rotateZ(79deg);"></div>
+      <div class="target49" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:30px;height:2px;left:160px;top:728px;transform:rotateZ(-13deg);"></div>
+      <div class="target50" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:132px;height:2px;left:139px;top:789px;transform:rotateZ(77deg);"></div>
+      <div class="target51" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:38px;height:2px;left:182px;top:857px;transform:rotateZ(-13deg);"></div>
+      <div class="target52" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:132px;height:2px;left:105px;top:797px;transform:rotateZ(80deg);"></div>
+      <div class="target53" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:97px;height:2px;left:297px;top:914px;transform:rotateZ(90deg);"></div>
+      <div class="target54" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:47px;height:2px;left:299px;top:867px;transform:rotateZ(-3deg);"></div>
+      <div class="target55" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:48px;height:2px;left:300px;top:957px;transform:rotateZ(15deg);"></div>
+      <div class="target56" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:81px;height:2px;left:259px;top:909px;transform:rotateZ(88deg);"></div>
+      <div class="target57" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:675px;height:2px;left:211px;top:724px;transform:rotateZ(-54deg);"></div>
+      <div class="target58" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:33px;height:2px;left:743px;top:460px;transform:rotateZ(36deg);"></div>
+      <div class="target59" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:676px;height:2px;left:238px;top:743px;transform:rotateZ(-54deg);"></div>
+      <div class="target60" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:34px;height:2px;left:347px;top:1007px;transform:rotateZ(37deg);"></div>
+      <div class="target61" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:400px;height:2px;left:-133px;top:893px;transform:rotateZ(-88deg);"></div>
+      <div class="target62" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:676px;height:2px;left:242px;top:745px;transform:rotateZ(-54deg);"></div>
+      <div class="target63" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:30px;height:2px;left:770px;top:478px;transform:rotateZ(35deg);"></div>
+      <div class="target64" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:676px;height:2px;left:260px;top:761px;transform:rotateZ(-54deg);"></div>
+      <div class="target65" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:676px;height:2px;left:264px;top:761px;transform:rotateZ(-54deg);"></div>
+      <div class="target66" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:678px;height:2px;left:282px;top:778px;transform:rotateZ(-54deg);"></div>
+      <div class="target67" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:678px;height:2px;left:299px;top:790px;transform:rotateZ(-54deg);"></div>
+      <div class="target68" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:28px;height:2px;left:375px;top:1027px;transform:rotateZ(35deg);"></div>
+      <div class="target69" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:28px;height:2px;left:398px;top:1044px;transform:rotateZ(37deg);"></div>
+      <div class="target70" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:20px;height:2px;left:421px;top:1059px;transform:rotateZ(36deg);"></div>
+      <div class="target71" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:26px;height:2px;left:795px;top:495px;transform:rotateZ(35deg);"></div>
+      <div class="target72" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:23px;height:2px;left:817px;top:509px;transform:rotateZ(35deg);"></div>
+     
+     
+      <div class="targetname" style="position:absolute;border:1px;cursor:default;z-index:5;color:white;width:401px;height:2px;left:154px;top:878px;font-size:7px;">ULY-4</div>
+      <div class="targetname" style="position:absolute;border:1px;cursor:default;z-index:5;color:white;width:401px;height:2px;left:166px;top:878px;font-size:7px;">ULY-6</div>
+      <div class="x1" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:15px;height:2px;left:121px;top:690px;transform:rotateZ(-14deg);"></div>
+      <div class="x2" style="position:absolute;border:1px;cursor:default;z-index:5;background-color:red;width:407px;height:2px;left:-35px;top:889px;transform:rotateZ(81deg);"></div>
+    
+      <div class="targetname" style="position:absolute;border:1px;cursor:default;z-index:5;color:white;width:97px;height:2px;left:290px;top:909px;font-size:7px;">Weighting Bridge-2</div>
+      <div class="targetname" style="position:absolute;border:1px;cursor:default;z-index:5;color:white;width:676px;height:2px;left:225px;top:729px;font-size:7px;">LY-1</div>    
+ <form method="post" action="{% url 'maploc' %}" id="myForm">{% csrf_token %} <div class="ko" style="position:absolute;left:80%;top:10%;background-color:green;width:10%;height:10%;">Source:<input type="text" id="input1" name="source" value=""><br><br>Destination<input type="text" id="input2" name="destination" value=""><br> </div></form>
+        X-coordinate
+        <input type="text" id="X">
+        <br>
+        <br>
+        Y-coordinate
+        <input type="text" id="Y">
+        <div class="scale-value"></div>
+        <canvas id="mapCanvas" width="1843" height="1167"></canvas>
+   
+    </div>
+
+    </div>
+    <div class="scale-value" style="background-color: blue;color:green;width:50%;"></div>
+    <script>
+      
+      document.getElementById("{{t}}").style.background="pink";
+      document.getElementById("input1").value="{{t}}"
+   
+   document.getElementById("{{q}}").style.background="blue" ;
+   document.getElementById("input2").value="{{q}}"
+  </script>
+{% if m %}
+<script>
+    // Define the canvas and its context
+    const canvas = document.getElementById('mapCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    // Clear the canvas before drawing
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // Begin drawing path on the canvas
+    ctx.beginPath();
+
+    // Loop through each item in the list 'm' and draw a line for each
+    {% for l in m %}
+        // Get x and y coordinates from Django template variables and parse as integers
+        
+        
+        // Move the drawing cursor to the specified coordinates
+        ctx.lineTo({{l.x}}, {{l.y}});
+    {% endfor %}
+    
+    // Set line styles and draw all lines at once
+    ctx.strokeStyle = 'blue'; // Set line color
+    ctx.lineWidth = 5; // Set line width
+    ctx.stroke(); // Draw all lines
+
+</script>
+{% else %}
+<script>
+    alert("path not found")
+</script>
+{% endif %}
+
+
+    <script>
+
+        let k = "{{t}}";
+        let k12 = "{{q}}";
+       
+   
+    
+        function handleKeyPress(event) {
+            if (event.ctrlKey && (event.key === 'q' || event.key === 'Q')) {
+          // Redirect to the specified URL
+          window.location.href = 'home';
+      }
+      
+            if (event.keyCode === 13) {  // Check if Enter key (key code 13) is pressed
+            
+               
+                const value1 = document.getElementById('input1').value.trim();
+                const value2 = document.getElementById('input2').value.trim();
+               
+    
+                // Reset previous background colors
+                if (k && document.getElementById(k)) {
+                    document.getElementById(k).style.background = "white";
+                }
+                if (k12 && document.getElementById(k12)) {
+                    document.getElementById(k12).style.background = "white";
+                }
+    
+                // Set new background colors based on input values
+                if (value1) { 
+                    const targetElement1 = document.getElementById(value1);
+                    if (targetElement1) {
+                        targetElement1.style.background = "pink";
+                        k = value1;
+                        
+                    }
+                }
+                if (value2) {
+                    const targetElement2 = document.getElementById(value2);
+                    if (targetElement2) {
+                        targetElement2.style.background = "blue";
+                        k12 = value2;
+                     
+                    }
+                } 
+               
+                event.preventDefault();
+                // Check if both input fields have values, then submit the form
+                if (value1 && value2) {
+                 
+     document.getElementById('myForm').submit()
+   
+}
+                }
+            }
+        
+    
+        // Add key press event listener to both input fields
+        document.getElementById('input1').addEventListener('keypress', handleKeyPress);
+        document.getElementById('input2').addEventListener('keypress', handleKeyPress);
+        document.addEventListener('keydown', handleKeyPress);
+      
+ 
+    </script>
+    
+    
+    <script>
+        
+        const mainContainer = document.querySelector('.maincontainer');
+        const mapContainer = document.querySelector('.mapcontainer');
+        let isDragging = false;
+        let startX, startY;
+        let translateX = 0, translateY = 0;
+        let scale = 1;
+        
+        const scaleDisplay = document.getElementById('scaleDisplay');
+
+        function updateScaleDisplay() {
+            scaleDisplay.textContent = `Scale: ${scale.toFixed(2)}`;
+        }
+
+        mapContainer.addEventListener('mousedown', (event) => {
+            isDragging = true;
+            startX = event.clientX;
+            startY = event.clientY;
+            mapContainer.style.cursor = 'grabbing';
+        });
+
+        document.addEventListener('mousemove', (event) => {
+            if (isDragging) {
+                const deltaX = event.clientX - startX;
+                const deltaY = event.clientY - startY;
+                translateX += deltaX / scale;
+                translateY += deltaY / scale;
+                mapContainer.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+                startX = event.clientX;
+                startY = event.clientY;
+            
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+            mapContainer.style.cursor = 'grab';
+        });
+        function updateCoordinates(event) {
+           
+    const rect = mapContainer.getBoundingClientRect();
+    const scaleX = mapContainer.clientWidth / rect.width;
+    const scaleY = mapContainer.clientHeight / rect.height;
+    
+    const mouseX = (event.clientX - rect.left) / scaleX;
+    const mouseY = (event.clientY - rect.top) / scaleY;
+
+    const mapX = (mouseX - mapContainer.clientLeft) / scale;
+    const mapY = (mouseY - mapContainer.clientTop) / scale;
+    document.getElementById('X').value = mapX.toFixed(2);
+    document.getElementById('Y').value = mapY.toFixed(2);
+  
+     
+  // logic x--> 4*x   y--> (y-14)*4 
+  
+}
+
+mapContainer.addEventListener('mousemove', updateCoordinates);
+
+// Event listener for scaling the map container
+function scaleMapContainer(delta) {
+    scale += delta;
+    mapContainer.style.transform = `scale(${scale})`;
+    updateCoordinates(event); // Update coordinates after scaling
+}
+
+// Add event listeners for zooming in and out using mouse wheel
+
+
+    </script>
+</body>
+</html>

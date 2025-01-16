@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: "Lato", sans-serif;
+  margin: 0;
+}
+.popup {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 9999; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px; /* Place content 60px from the top */
+  }
+
+  /* Popup content */
+  .popup-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+
+  /* Close button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+.sidenav {
+  height: 100%;
+  width: 0; /* Modified: Initially hidden */
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  background-color: #D3D3D3;
+  overflow-x: hidden;
+  
+  transition: 0.5s;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+.left-sidenav {
+  left: 0;
+}
+
+.right-sidenav {
+  right: 0;
+}
+
+.main {
+  transition: margin-left 0.5s, margin-right 0.5s;
+  padding: 16px;
+}
+.y1{display:flex;}
+.openbtn {
+  font-size: 30px;
+  cursor: pointer;
+  position: fixed;
+  z-index: 2;
+  top: 20px;
+  margin-left:50%; 
+  background-color: white;
+  transition: background-color 0.3s; /* Added transition effect */
+}
+
+.openbtn.active { /* Added style for active button */
+  background-color: yellow;
+  padding:20px 20px;
+}
+
+.left-openbtn {
+  left: 10px;
+}
+
+.right-openbtn {
+  right: 10px;
+}
+
+/* Added media query to ensure gap between navbars */
+@media screen and (max-width: 600px) {
+  .right-sidenav {
+    right: 10px; /* Adjust the gap as needed */
+  }
+}
+</style>
+</head>
+<body>
+
+<div id="leftSidenav" class="sidenav left-sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="y1">
+    <a style="color: red;">Bin</a>
+    <a style="color: red;">ECOR21129937533-15-24</a>
+  </div>
+  <div class="y1">
+    <a style="color: red;">Zone</a>
+    <a style="color: red;">LY-1</a>
+  </div>
+  <div class="y1">
+    <a style="color: red;">Information</a>
+    
+  </div>
+  <div class="y1">
+    <a>Last Updated Time</a>
+    <a>3/18/2024 12:23:34</a>
+  </div>
+  
+  <div class="y1">
+    <a>Last Activity</a>
+    <a>Picked 4 BUNDLE(s) BY VS4</a>
+  </div>
+  <div class="y1">
+    <a style="color: red;">Configuration</a>
+    
+  </div>
+  <div class="y1">
+    <a>Material Sub Type</a>
+    <a>TMT REBAR</a>
+  </div>
+  <div class="y1">
+    <a>Material Code</a>
+    <a>161220001200101</a>
+  </div>
+  <div class="y1">
+    <a>Quality</a>
+    <a>Domestic Non Prime</a>
+  </div>
+  <div class="y1">
+    <a>Material Description</a>
+    <a>TMT REBAR IN COIL 12MM IS 1786 FE500</a>
+  </div>
+  <div class="y1">
+    <a>Layer Limit</a>
+    <a>20</a>
+  </div>
+  <div class="y1">
+    <a style="color: red;">Weight Limit</a>
+    <a style="color: red;">2204.220 ton</a>
+  </div>
+  <div class="y1">
+    <a style="color: red;">Afflicted Status</a>
+    <a style="color: red;">Normal</a>
+  </div>
+  <div class="y1">
+    <a style="color: red;">Caluclated Weight</a>
+    <a style="color: red;">526.964 ton</a>
+  </div>
+  <a href="#" style="background-color: black; border:0;text-align:center;"   onmouseover="this.style.backgroundColor='yellow';"onmouseout="this.style.backgroundColor='black';" onclick="togglePopup('popup1')">Layer Details</a>
+  <a href="#" style="background-color: black; border:0;text-align:center;" onmouseover="this.style.backgroundColor='yellow';"onmouseout="this.style.backgroundColor='black';" onclick="togglePopup('popup2')">Heat Details</a>
+  <a href="#" style="background-color: black; border:0;text-align:center;" onmouseover="this.style.backgroundColor='yellow';"onmouseout="this.style.backgroundColor='black';" onclick="togglePopup('popup3')">Export Domestic</a>
+  <a href="#" style="background-color: black; border:0;text-align:center;" onmouseover="this.style.backgroundColor='yellow';"onmouseout="this.style.backgroundColor='black';" onclick="togglePopup('popup4')">Update Configuration</a>
+  <a href="#" style="background-color: black; border:0;text-align:center;" onmouseover="this.style.backgroundColor='yellow';"onmouseout="this.style.backgroundColor='black';" onclick="togglePopup('popup5')">Update Dimension</a>
+  <div class="y1">
+    <a>Materials On Bin</a>
+    
+  </div>
+</div>
+
+<div id="rightSidenav" class="sidenav right-sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="y1">
+    <a style="color: red; font-size:16px;">Material</a>
+    <a style="color: red; font-size:16px;">16C00562066</a>
+  </div>
+  <div class="y1">
+  <a style="color: red; font-size:16px;">Information</a>
+  </div>
+  <div class="y1">
+    <a>Last Activity</a>
+    <a style="margin-left:20px;">Attributes Updated By External System</a>
+  </div>
+  <div class="y1">
+    <a>Location</a>
+    <a style="margin-left:20px;">EB017-1</a>
+  </div>
+  <div class="y1">
+    <a>Material Code</a>
+    <a>1612000123912</a>
+  </div>
+  <div class="y1">
+    <a>Material Description</a>
+    <a>TMT REBAR IN COIL 12MM</a>
+  </div>
+  <div class="y1">
+    <a>Heat Id</a>
+    <a style="margin-left:30px;">91837</a>
+  </div>
+  <div class="y1">
+    <a>Heat Suffix</a>
+    <a style="margin-left:30px;">-</a>
+  </div>
+  <div class="y1">
+    <a>Bundle Number</a>
+    <a style="margin-left:30px;">16C0000542048</a>
+  </div>
+  <div class="y1">
+    <a>Bundle Pieces</a>
+    <a style="margin-left:30px;">1</a>
+  </div>
+  <div class="y1">
+    <a>Suffix</a>
+    <a style="margin-left:30px;">N/A</a>
+  </div>
+  <div class="y1">
+    <a>Export</a>
+    <a style="margin-left:30px;">N/A</a>
+  </div>
+  <div class="y1">
+    <a>Prime</a>
+    <a style="margin-left:30px;">N/A</a>
+  </div>
+  <div class="y1">
+    <a>Mill Description</a>
+    <a style="margin-left:30px;">N/A</a>
+  </div>
+  <div class="y1">
+    <a>Material Type</a>
+    <a style="margin-left:30px;">TMT REBAR</a>
+  </div>
+  <div class="y1">
+    <a style="color: red;">Customer</a>
+    <a style="margin-left:30px;color: red;">NO CUSTOMER</a>
+  </div>
+  <div class="y1">
+    <a style="color: red;">Grade</a>
+    <a style="margin-left:30px;color: red;">8001</a>
+  </div>
+  <div class="y1">
+    <a style="color: red;">Caluclated Weight</a>
+    <a style="margin-left:30px;color: red;">1.317 ton</a>
+  </div>
+  <a href="#" style="background-color: black; border:0;text-align:center;">SHOW HISTORY</a>
+</div>
+
+<div class="main">
+  <span class="openbtn left-openbtn" onclick="openBothNav()" id="openButton">&#9776;</span>  
+  <h2>Main Content</h2>
+  <p>Click on the element above to open both side navigation menus.</p>
+</div>
+<div id="popup1" class="popup">
+  <!-- Popup content -->
+  <div class="popup-content">
+    <span class="close" onclick="togglePopup('popup1')">&times;</span>
+    <p>This is popup 1!</p>
+  </div>
+</div>
+<div id="popup2" class="popup">
+  <!-- Popup content -->
+  <div class="popup-content">
+    <span class="close" onclick="togglePopup('popup2')">&times;</span>
+    <p>This is popup 2!</p>
+  </div>
+</div>
+<div id="popup3" class="popup">
+  <!-- Popup content -->
+  <div class="popup-content">
+    <span class="close" onclick="togglePopup('popup3')">&times;</span>
+    <p>This is popup 3!</p>
+  </div>
+</div>
+<div id="popup4" class="popup">
+  <!-- Popup content -->
+  <div class="popup-content">
+    <span class="close" onclick="togglePopup('popup4')">&times;</span>
+    <p>This is popup 4!</p>
+    
+  </div>
+</div>
+<div id="popup5" class="popup">
+  <!-- Popup content -->
+  <div class="popup-content">
+    <span class="close" onclick="togglePopup('popup5')">&times;</span>
+    <p>This is popup 5!</p>
+  </div>
+</div>
+<script>
+function openBothNav() {
+  document.getElementById("leftSidenav").style.width = "350px";
+  document.getElementById("rightSidenav").style.width = "350px";
+  document.getElementsByClassName("main")[0].style.marginLeft = "150px";
+  
+  // Add class to change background color of the button
+  document.getElementById("openButton").classList.add("active");
+}
+
+function closeNav() {
+  document.getElementById("leftSidenav").style.width = "0";
+  document.getElementById("rightSidenav").style.width = "0";
+  document.getElementsByClassName("main")[0].style.marginLeft = "0";
+  
+  // Remove class to reset background color of the button
+  document.getElementById("openButton").classList.remove("active");
+}
+
+// Function to toggle the popup
+function togglePopup(popupId) {
+  var popup = document.getElementById(popupId);
+  if (popup.style.display === "block") {
+    popup.style.display = "none";
+  } else {
+    popup.style.display = "block";
+  }
+}
+
+</script>
+
+</body>
+</html>

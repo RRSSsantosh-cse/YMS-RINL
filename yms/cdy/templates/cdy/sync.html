@@ -1,0 +1,707 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <style>
+      .pp {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+    }
+    .over {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    
+      .bnt{
+        margin-top:20px;
+        margin-left:40%;  
+      }
+      .bnt button{
+        padding:10px 10px;
+      }
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drop down menu</title>
+    <style>
+    *    /**/
+      {
+          padding:0; 
+          margin:0 ;
+          box-sizing: border-box;
+      }
+      body{                  /*background-image creation*/
+      background-image:url();
+      background-size:cover;
+      background-position:center;
+      box-sizing:border-box;
+      }
+      .menu-bar                          /* menu bar configuration*/
+      {
+          background:green;
+          text-align:center;
+         
+      }
+      .menu-bar ul             /*display of elements in menu bar*/
+      {
+         display:flex;
+         list-style:none;
+         color:green; 
+      }
+      .menu-bar ul li       /*spcaing betwen elements*/
+      {
+        width:70px;
+        margin:10px;
+        
+       
+      }
+      li a {
+        font-size: 12px;
+      
+      }
+      .menu-bar ul li a 
+      {
+          text-decoration:none ;
+          color:#fff;
+  
+      }
+      .active ,.menu-bar ul li:hover 
+      {
+       background:red ;
+       border-radius:3px;  
+      }
+      .sub-menu
+      { 
+          display:none;
+      }
+      .menu-bar ul li:hover .sub-menu
+      {
+        display:block; 
+        position:absolute;
+        background:rgb(0,100,0) ;
+        margin-top:-40px;
+        margin-left:-15px ;  
+        
+      }
+      .menu-bar ul li:hover .sub-menu ul 
+      {
+          display:block ;
+          margin:5px;
+          }
+          .menu-bar ul li:hover .sub-menu ul li 
+      {
+       
+          width:120px ;
+          padding:5px;
+          }
+      .sub-menu-2
+      {
+          display:none;
+      
+
+        
+      }
+      .hover-me:hover .sub-menu-2 
+      {
+    
+          position:absolute ;
+          display:block;
+          margin-top:-60px;
+          margin-left:90px ;
+          background:green;
+          font-size:10px;
+
+      }
+      .pop {
+        display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 9999; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    max-width: 100%;
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 5px; /* Place content 60px from the top */
+        }
+        .popup-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 15% from the top and centered */
+    padding: 5%;
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */
+    height:100%;
+    margin-left:20px;
+    max-width: 200%;
+    margin-right: 100px;
+    
+  }
+        .close:hover{background-color:red;border-radius:50%;}
+     
+        .form-container {
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+           width:30%;
+           height:100%;
+           margin-left:30%;
+        }
+        .form-group {
+          margin-bottom: 10px;
+          margin-left:80px;
+     
+        }
+        .form-group label {
+            font-weight: bold;
+            display: block;
+       
+            font-size:14px;
+        }
+        .form-group input {
+            width: 50%;
+         
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+       
+        .submit-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-left:30%;
+            margin-top:3px;
+        }
+     
+      
+      </style>
+</head>
+<body>
+    <!--
+1)creation of list using div<ul><li></li></ul>
+2)under list create sub menu 
+Traffic Building,ULY-1,ULY-3,ULY-4,ULY-6,Weighting Bridge and Weighting Bridge 2
+
+    -->
+    <!--hook out  deletion  hook in to generate work order  -->
+   <h1>YARD MANAGEMENT SYSTEM</h1>
+    <div class="menu-bar">
+    <ul>
+       
+        <li><a href="#">Yard Map</a>
+        <div class="sub-menu">
+            <ul>
+               <li class="hover-me"><a href="#">Yard Map 2D</a>
+                <div class="sub-menu-2">
+                    <ul>
+                    <li><a href="#">CSPY East Block</a></li>
+                    <li><a href="#">CSPY West Block</a></li>
+                    <li><a href="#">Consignment</a></li>
+                    <li><a href="#">Kiosk</a></li>
+                    <li><a href="#">Kiosk-2</a></li>
+                    <li><a href="#">LY-1</a></li>
+                    <li><a href="#">LY-2</a></li>
+                    <li><a href="#">LY-3</a></li>
+                    <li><a href="#">LY-4</a></li>
+                    <li><a href="#">Parking</a></li>
+                    <li><a href="#">Reprocessing</a></li>
+                    <li><a href="#">Consignment</a></li>
+                    <li><a href="#">Traffic Building</a></li>
+                    <li><a href="#">ULY-1</a></li>
+                    <li><a href="#">ULY-3</a></li>
+                    <li><a href="#">ULY-4</a></li>
+                    <li><a href="#">ULY-6</a></li>
+                    <li><a href="#">Weighting Bridge</a></li>
+                    <li><a href="#">Weighting Bridge-2</a></li>
+              </ul>
+                </div>
+            
+            
+            
+            
+            
+            </li>
+            </ul>
+            </div></li>
+        <li><a href="#">Monitors</a>
+            <div class="sub-menu">
+                <ul>
+                    <li><a href="#">Yard Monitor</a>
+                        
+                 </li>
+            <li><a href="#">Rake Monitor</a>
+           
+        </li>
+        <li><a href="#">Hook Monitor</a></li>
+        <li><a href="#">DashBoard </a></li>
+    </ul>
+    </div>  
+       </li>
+        <li class="hover-me"><a href="#">Rake Management</a>
+        <div class="sub-menu">
+          <ul>
+            <li><a href="#">Hooks</a></li>
+            <li><a href="#">Rakes</a></li>
+            <li><a href="#">Wagon Type Configuration</a></li>
+            <li><a href="#">Pre Rake Out Verification</a></li>
+          </ul>
+        </div>
+        </li>
+        <li class="hover-me"><a href="#">Truck Manager</a>
+        <div class="sub-menu">
+<ul>
+<li><a href="#">Inbound Trucks</a></li>
+<li><a href="#">Dispatch Trucks</a></li>
+<li><a href="#">Dispatch by Rake</a></li>
+<li><a href="#">Others</a></li>
+</ul>
+
+
+        </div>
+        
+        
+        </li>
+        <li><a href="#">Workorders</a>
+          <div class="sub-menu">
+              <ul>
+                 <li class="hover-me"><a href="#">WorkOrder Index</a>
+                 
+                  <div class="sub-menu-2">
+                      <ul>
+                      <li><a href="{% url 'inboundorder' %}">Inbound via Hook</a></li>
+                      <li><a href="{% url 'inb' %}">Inbound via Truck</a></li>
+                      
+                      <li><a href="{% url 'materialp' %}">MaterialProcessing</a></li>
+                    
+                      <li><a href="#">Rake Dispatch</a></li>
+                      <li><a href="#">Rake Outbound</a></li>
+                      <li><a href="#">DirectDispatchbyRake</a></li>
+                      <li><a href="{% url 'dis' %}">Truck Dispatch</a></li>
+                      <li><a href="#">Truck Outbound</a></li>
+                      <li><a href="#">DirectDispatchbyTruck</a></li>
+                     
+                      <li><a href="{% url 'ord' %}">CurrentWorkorders</a></li>
+                      <li><a href="#">FinishedWorkorders</a></li>
+                      <li><a href="#">CancelledWorkorders</a></li>
+                      
+                </ul>
+                  </div>
+        
+              </li>
+              </ul>
+             
+                  <ul>
+
+                     <li class="hover-me"><a href="#">WorkOrder Manager</a>
+                      <div class="sub-menu-2">
+                        <ul>
+                        <li><a href="#">Hook Unload</a></li>
+                        <li><a href="#">Rake Dispatch</a></li>
+                      
+                      </ul>
+                      </div>
+                     </li>
+                  </ul>              
+                              </div>
+      </li>
+        <li><a href="#">Search</a></li>
+        <li><a href="#">Manual Updates</a></li>
+        <li><a href="#">Reports</a>
+        <div class="sub-menu">
+            <ul>
+               <li class="hover-me"><a href="#">Miscellenous</a>
+              <div class="sub-menu-2">
+           
+                    <ul>
+                    <li><a href="#">dispatch truck history</a></li>
+                    <li><a href="#">rake plan received</a></li>
+                    <li><a href="#">f-note report history</a></li>
+                    <li><a href="#">pre rake out</a></li>
+                    <li><a href="#">pre rake out verification</a></li>
+                    <li><a href="#">rakes challan gross weightment report</a></li>
+                    <li><a href="#">material processing report</a></li>
+                    <li><a href="#">indent dispatched  through yms</a></li>
+                    <li><a href="#">pre raked out vsloaded</a></li>
+                    <li><a href="#">Parking</a></li>
+                    <li><a href="#">dispatch rake verification</a></li>
+                    <li><a href="#">hold wagon history report </a></li>
+            
+              </ul>
+                </div>
+              
+              
+              
+              </li>
+            </ul>
+          
+                 <ul>
+                   <li class="hover-me"><a href="#">Work Orders</a>
+                    <div class="sub-menu-2">
+           
+                      <ul>
+                      <li><a href="#">hook workorders</a></li>
+                      <li><a href="#">rake plan workorders</a></li>
+                      <li><a href="#">finsihed workorders detail</a></li>
+                      <li><a href="#">cancelled workorders</a></li>
+                    
+              
+                </ul>
+                  </div>
+                  
+                  
+                  
+                  
+                  
+                  </li>
+                </ul>
+              
+                    <ul>
+                       <li class="hover-me"><a href="#">Interface Reports</a>
+                        <div class="sub-menu-2">
+           
+                          <ul>
+                          <li><a href="#">hook recieved history</a></li>
+                          <li><a href="#">captive truck received history</a></li>
+                          <li><a href="#">rake plan received history</a></li>
+                          <li><a href="#">truck plan received history</a></li>
+                          <li><a href="#">rake dispatch history report</a></li>
+                          <li><a href="#">rake dispatch material report history</a></li>
+                          <li><a href="#">text report history</a></li>
+                          <li><a href="#">stock verification received history</a></li>
+                          <li><a href="#">stock verification sent history </a></li>
+                          <li><a href="#">material wise weight information from erp </a></li>
+                       
+                  
+                    </ul>
+                      </div>
+                      
+                      
+                      
+                      
+                      </li>
+                    </ul>
+                  
+                        <ul>
+                           <li class="hover-me"><a href="#">Yard Reports</a>
+                            <div class="sub-menu-2">
+                            <ul>
+                              <li><a href="#">location history</a></li>
+                              <li><a href="#">layer wise report</a></li>
+                              <li><a href="#">stock yard stock</a></li>
+                              <li><a href="#">staged yard stock </a></li>
+                              <li><a href="#">material coe wise bins report </a></li>
+                             
+                            
+                      
+                        </ul>
+                      </div>
+                      </li>
+                        </ul>
+                       
+                           
+        <li><a onclick="wg()">Configuration</a>
+          <div class="over" id="over" onclick="clse()"></div>
+<div class="pp" id="pp">
+  <h2>Form</h2>
+  <form>
+      <label for="name">Name:</label><br>
+      <input type="text" id="name" name="name" required><br>
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email" required><br><br>
+      <button type="submit">Submit</button>
+  </form>
+</div>
+<script>
+  // Function to open the pop-up
+  function wg() {
+      document.getElementById("pp").style.display = "block";
+      document.getElementById("over").style.display = "block";
+  }
+
+  // Function to close the pop-up
+  function clse() {
+      document.getElementById("pp").style.display = "none";
+      document.getElementById("over").style.display = "none";
+  }
+</script>
+            <div class="sub-menu">
+                <ul>
+                   <li><a href="#">Sync Material Weight</a></li>
+                </ul>
+                
+                
+                    <ul>
+                       <li><a href="#">Update Device Information</a></li>
+                    </ul>
+                   
+                    
+                        <ul>
+                           <li><a href="#">Material Management</a></li>
+                        </ul>
+                      
+                        
+                            <ul>
+                               <li><a href="#">Bin Configuration</a></li>
+                            </ul>
+                          
+                            
+                                <ul>
+                                   <li><a href="#">GPS Configuration</a></li>
+                                </ul>
+                               
+                                    <ul>
+                                       <li><a href="#">Update General Configuration</a></li>
+                                    </ul>
+                                 
+                                    
+                                        <ul>
+                                           <li><a href="#">Announcement Configuration</a></li>
+                                        </ul>
+                                        
+                                       
+                                            <ul>
+                                               <li><a href="#">User Configuration</a></li>
+                                            </ul>
+                                        
+                                         
+                                                <ul>
+                                                   <li><a href="#">Update Authority</a></li>
+                                                </ul>
+                                              
+                                                    <ul>
+                                                       <li><a href="#">Update Report Authority</a></li>
+                                                    </ul>
+                                                  
+                                                    
+                                                        <ul>
+                                                           <li><a href="#">User Defined Vehicle Name</a></li>
+                                                        </ul>
+                                                        </div>
+        </li>
+    </ul>
+</div>
+<div class="bnt">
+<h4 style="margin-bottom: 10px;margin-left: 10px;">Sync Material Weight </h4>
+<a onclick="tog()" style="text-decoration:none;background-color: black; color:white;padding:5px 5px;">Add New Material Weight</a>
+
+</div>
+<br>
+
+<table>
+    <tr>
+        <th>Id</th>
+      <th>Material Code</th>
+      <th>Material Desc</th>
+      <th>Caluclated Weight(ton)</th>
+      
+      <th>Caluclated Weight(Based on current stock in eTrax)(ton)</th>
+      <th>Currently in CDYMS</th>
+      <th>Configure</th>
+      <th>Sync Weight</th>
+      <th>Date Modified</th>
+      
+    </tr>
+    
+    {% for x in k %}
+    <tr>
+     <td>{{x.mid}}</td>
+     <td>{{x.mcode}}</td>
+     <td>{{x.mdesc}}</td>
+     <td>{{x.cweight}}</td>
+     <td>{{x.cstock}}</td>
+     <td>[]</td>
+     <td><a style="text-decoration:none;background-color: black; color:white;" onclick="gkm(`{{x.id}}`)">Configure</a></td>
+     <td><a href="#" style="text-decoration:none;background-color: black; color:white;">SyncWeight</a></td>
+     <td>{{x.dte}},{{x.tm}}</td>
+  
+    </tr>
+    <div id="popil{{x.id}}" class="pop">
+      <!-- Popup content -->
+      
+      <div class="form-container">
+        <span class="close" onclick="togi(`{{x.id}}`)" style=" font-size:28px; position:relative;left:90%;" >&times;</span>
+        <form id="materialForm">
+            <div class="form-group">
+                <label for="materialCode">Material Code</label>
+                <input type="text" id="materialCode" name="materialCode" value="{{x.mcode}}" readonly>
+            </div>
+            <div class="form-group">  
+                <label for="materialDescription">Material Code Description</label>
+                <input type="text" id="materialDescription" name="materialDescription" readonly value="{{x.mdesc}}">
+            </div>
+            <div class="form-group">
+                <label for="materialType">Material Type</label>
+                <input type="text" id="materialType" name="materialType" value="{{x.mtype}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="sectionCodeDescription">Section Code Description</label>
+                <input type="text" id="sectionCodeDescription" name="sectionCodeDescription" value="{{x.secodedes}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="sectionCode">Section Code</label>
+                <input type="text" id="sectionCode" name="sectionCode"  value="{{x.seccode}}"readonly>
+            </div>
+            <div class="form-group">
+                <label for="sizeCode">Size Code</label>
+                <input type="text" id="sizeCode" name="sizeCode" value="{{x.scode}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="gradeCode">Grade Code</label>
+                <input type="text" id="gradeCode" name="gradeCode" value="{{x.grcode}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="lengthCode">Length Code</label>
+                <input type="text" id="lengthCode" name="lengthCode" value="{{x.lcode}}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="lengthDescription">Length Code Description</label>
+                <input type="text" id="lengthDescription" name="lengthDescription" value="{{x.lcodedes}}"readonly>
+            </div>
+            <div class="form-group">
+                <label for="gradeDescription">Grade Code Description</label>
+                <input type="text" id="gradeDescription" name="gradeDescription" value="{{x.grcodedes}}"readonly>
+            </div>
+            <div class="form-group">
+                <label for="sizeDescription">Size Code Description</label>
+                <input type="text" id="sizeDescription" name="sizeDescription" value="{{x.scodedes}}" readonly>
+            </div>
+         
+        </form>
+    </div>
+    
+    
+        
+      </div>
+{% endfor %}
+
+</div> 
+<div id="popi" class="pop">
+  <!-- Popup content -->
+  
+  <div class="form-container">
+    <span class="close" onclick="tog()" style=" font-size:28px; position:relative;left:90%;" >&times;</span>
+    <form id="materialForm">
+        <div class="form-group">
+            <label for="materialCode">Material Code</label>
+            <input type="text" id="materialCode" name="materialCode">
+        </div>
+        <div class="form-group">
+            <label for="materialDescription">Material Code Description</label>
+            <input type="text" id="materialDescription" name="materialDescription">
+        </div>
+        <div class="form-group">
+            <label for="materialType">Material Type</label>
+            <input type="text" id="materialType" name="materialType">
+        </div>
+        <div class="form-group">
+            <label for="sectionCodeDescription">Section Code Description</label>
+            <input type="text" id="sectionCodeDescription" name="sectionCodeDescription">
+        </div>
+        <div class="form-group">
+            <label for="sectionCode">Section Code</label>
+            <input type="text" id="sectionCode" name="sectionCode">
+        </div>
+        <div class="form-group">
+            <label for="sizeCode">Size Code</label>
+            <input type="text" id="sizeCode" name="sizeCode">
+        </div>
+        <div class="form-group">
+            <label for="gradeCode">Grade Code</label>
+            <input type="text" id="gradeCode" name="gradeCode">
+        </div>
+        <div class="form-group">
+            <label for="lengthCode">Length Code</label>
+            <input type="text" id="lengthCode" name="lengthCode">
+        </div>
+        <div class="form-group">
+            <label for="lengthDescription">Length Code Description</label>
+            <input type="text" id="lengthDescription" name="lengthDescription">
+        </div>
+        <div class="form-group">
+            <label for="gradeDescription">Grade Code Description</label>
+            <input type="text" id="gradeDescription" name="gradeDescription">
+        </div>
+        <div class="form-group">
+            <label for="sizeDescription">Size Code Description</label>
+            <input type="text" id="sizeDescription" name="sizeDescription">
+        </div>
+        <button type="submit" class="submit-button">Submit</button>
+    </form>
+</div>
+
+
+    
+  </div>
+   
+   <!--
+19911 611040000 BLOOM 320*250 MM WT 1029.418  10294.18  21/6/23 19:49:14
+19912 615100700 bloom 200x200 MM 2830 505.428 505.428 505.248     21/6/23 19:49:15
+19913 615210100  BLOOM 200x200 mm is:2830-C20 MM N/a N.a      21/6/23 19:49:16
+-->
+<script>
+  function tog() {
+        var popup = document.getElementById('popi');
+        if (popup.style.display === "block") {
+          popup.style.display = "none";
+        } else {
+          popup.style.display = "block";
+        }
+      }
+
+      function gkm(k) {
+        var popup = document.getElementById('popil'+k);
+        if (popup.style.display === "block") {
+          popup.style.display = "none";
+        } else {
+          popup.style.display = "block";
+        }
+      }
+      function togi(k) {
+        var popup = document.getElementById('popil'+k);
+        if (popup.style.display === "block") {
+          popup.style.display = "none";
+        } else {
+          popup.style.display = "block";
+        }
+      }
+
+</script> 
+  
+
+</body>
+</html>

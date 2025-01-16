@@ -1,0 +1,127 @@
+<!--this is the page which is used for generating reports-->
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+
+</style>
+</head>
+<body>
+
+<h2>HTML Table</h2>
+
+<table>
+  <tr>
+    <th>Indent No</th>
+    <th>Sequence</th>
+    <th>Wagon Destination</th>
+    <th>Wagon Name</th>
+    <th>Material Code</th>
+    <th>Material Description</th>
+    <th>SO Sto Qty(Mt)</th>
+    <th>Wagon Health</th>
+    <th>Trucks</th>
+    <th>Workorders</th>
+
+  </tr>
+  <tr>
+    <td>240303</td>
+    <td>1</td>
+    <td>GZB</td>
+    <td>BOST-1</td>
+    <td>151200020800300</td>
+    <td>TMT REBAR 20MM IS 1786 FE500D</td>
+    <td>65</td>
+    <td>FIT</td>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+  <tr>
+    <td>240303</td>
+    <td>2</td>
+    <td>GZB</td>
+    <td>BOST-2</td>
+    <td>471100050330200</td>
+    <td>ROUND 50 MM SAE</td>
+    <td>65</td>
+    <td>FIT</td>
+    <td>-</td>
+    <td>-</td> <!--only pending work orders are displayed not cancelled and finished-->
+  </tr>
+  <tr>
+    <td>Centro comercial Moctezuma</td>
+    <td>Francisco Chang</td>
+    <td>Mexico</td>
+  </tr>
+  <tr>
+    <td>Ernst Handel</td>
+    <td>Roland Mendel</td>
+    <td>Austria</td>
+  </tr>
+  <tr>
+    <td>Island Trading</td>
+    <td>Helen Bennett</td>
+    <td>UK</td>
+  </tr>
+  <tr>
+    <td>Laughing Bacchus Winecellars</td>
+    <td>Yoshi Tannamuri</td>
+    <td>Canada</td>
+  </tr>
+  <tr>
+    <td>Magazzini Alimentari Riuniti</td>
+    <td>Giovanni Rovelli</td>
+    <td>Italy</td>
+  </tr>
+</table>
+
+</body>
+</html>
+
+<!-- PRE RAKE OUT REPORT THIS IS FILE
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    body{background-color:gray;}
+    .container{position:absolute;top:20%;left:10%;background-color:white;height:60%;width:70%;}
+    </style>
+</head>
+<body>
+    <div class="container">
+    <h4 style="margin:15px;text-align:center;background-color:gray;">Rake Plan Workorders</h4>
+    <form style="margin-top:30px;">
+
+
+  Indent No:<select name="cars" id="cars">
+  <option value="Equal To">Equal To</option>
+
+    <option value="Like">Like</option>
+ 
+
+</select><input type="text"><br><br>
+     <input type="submit" value="Submit">
+    </form>
+    </div>
+</body>
+</html>
+
+
+
+-->

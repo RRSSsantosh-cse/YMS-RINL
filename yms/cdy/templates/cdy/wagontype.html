@@ -1,0 +1,924 @@
+<!--how to keep drop menu fixed by changing thew contents -->
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <style>
+      
+      .bnt{
+        margin-top:20px;
+      }
+      .bnt button{
+        padding:10px 10px;
+      }
+          table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+          }
+          
+          td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+          }
+          
+   
+        </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drop down menu</title>
+    <style>
+    *    /**/
+      {
+          padding:0; 
+          margin:0 ;
+          box-sizing: border-box;
+      }
+      body{                  /*background-image creation*/
+      background-image:url();
+      background-size:cover;
+      background-position:center;
+      box-sizing:border-box;
+      }
+      .menu-bar                          /* menu bar configuration*/
+      {
+          background:green;
+          text-align:center;
+         
+      }
+      .menu-bar ul             /*display of elements in menu bar*/
+      {
+         display:flex;
+         list-style:none;
+         color:green; 
+      }
+      .menu-bar ul li       /*spcaing betwen elements*/
+      {
+        width:70px;
+        margin:10px;
+        
+       
+      }
+      li a {
+        font-size: 12px;
+      
+      }
+      .menu-bar ul li a 
+      {
+          text-decoration:none ;
+          color:#fff;
+  
+      }
+      .active ,.menu-bar ul li:hover 
+      {
+       background:red ;
+       border-radius:3px;  
+      }
+      .sub-menu
+      { 
+          display:none;
+      }
+      .menu-bar ul li:hover .sub-menu
+      {
+        display:block; 
+        position:absolute;
+        background:rgb(0,100,0) ;
+        margin-top:-40px;
+        margin-left:-15px ;  
+        
+      }
+      .menu-bar ul li:hover .sub-menu ul 
+      {
+          display:block ;
+          margin:5px;
+          }
+          .menu-bar ul li:hover .sub-menu ul li 
+      {
+       
+          width:120px ;
+          padding:5px;
+          }
+      .sub-menu-2
+      {
+          display:none;
+      
+
+        
+      }
+      .hover-me:hover .sub-menu-2 
+      {
+    
+          position:absolute ;
+          display:block;
+          margin-top:-60px;
+          margin-left:90px ;
+          background:green;
+          font-size:10px;
+
+      }
+      .popup {
+            display: none; /* Hide the pop-up by default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+        }
+
+        .cont{
+            width:100% ;
+            min-height:100vh;
+            background-color: #0b0423;
+            display:flex;
+            align-items:center ;
+            justify-content: center;
+        }
+        #left,#right 
+        {
+            width:300px ;
+            min-height: 400px;
+            margin:20px;
+            border:2px dashed #fff;
+        }
+        .list{
+            background-color: #e91e63;
+            height:60px;
+            margin:30px;
+            color:#fff;
+            cursor:grab;
+        }
+        /* Styling for the overlay */
+        .overlay {
+            display: none; /* Hide the overlay by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+     
+        .pop{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 9999; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px; /* Place content 60px from the top */
+  }
+
+
+  .pap{
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 9999; /* Sit on top */
+    left: 0;
+   top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px; /* Place content 60px from the top */
+  }
+
+  /* Popup content */
+  .popup-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+  }
+  .pop-content {
+    background-color: #fefefe;
+  /* 15% from the top and centered */
+    padding: 10px;
+    border: 1px solid #888;
+   
+  }
+
+  /* Close button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .hidden {
+            display: none;
+        }
+
+.container{
+    position: absolute;
+    left:10%;
+    top:10%;
+
+}
+.x1{
+   background-color: red; 
+   width:1200px;
+   height:450px;
+   display: flex;
+ }
+ .x2{
+    background-color: whitesmoke; 
+   width:300px;
+   height:450px;
+   overflow-y: scroll;
+  font-size:18px;
+  display: flex;
+  flex-direction: column;
+ }
+ .x3{
+   display:flex;
+   flex-direction: column; 
+ }
+ .x7{display: flex;flex-direction: column;}
+ .k1{display:flex;margin-top:20px;}
+ .k2{margin-left:30px;}
+ .k4{display:flex;margin-top: 20px;}
+ .k5{margin-left:30%;color:aliceblue;background-color: black;}
+ .x5{display:flex;}
+.x11{background-color: blue;width:380px;text-align: center;}
+.x11 a{text-decoration: none;font-size:18px;color:black;cursor: pointer;}
+.x11:hover{background-color:yellowgreen;}
+.x12{ background-color:green;width:410px;text-align: center;}
+.x12 a{text-decoration: none;font-size:18px;color:black;cursor: pointer;}
+.x12:hover{background-color:yellowgreen;}
+.x6{background-color:aquamarine;width:800px;text-align: center;height:5%;  }
+      
+.xq {display: none;
+  position: fixed;
+            background-color: #fff;
+            width: 500px;
+            height: 400px;
+            display: flex;
+            top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border:2px solid black;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+  
+}
+
+        .x1q {
+            background-color: blue;
+            width: 200px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .k1q {
+            width: 200px; 
+            height: 30px;
+            background-color: black;
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+            cursor: pointer; /* Change cursor to pointer for better UX */
+        }
+
+        .x2q {
+          position: fixed;
+        top:0;
+          left:40%;
+            width: 300px; /* Adjust width of x2 */
+            height: 400px; /* Adjust height of x2 */
+            padding: 20px;
+            box-sizing: border-box;
+          
+        }
+        .k3q{text-align:center;}
+.pp {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        z-index: 500;
+    }
+    .over {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    .form-container {
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+           width:30%;
+           height:90%;
+           margin-left:35%;
+           top:30px;
+        }
+        .form-group {
+          margin-bottom: 20px;
+          margin-left:80px;
+     
+        }
+        .form-group label {
+            font-weight: bold;
+            display: block;
+       
+            font-size:14px;
+        }
+        .form-group input {
+            width: 50%;
+         
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            padding:5px 5px;
+        }
+       
+        .submit-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-left:30%;
+            margin-top:3px;
+        }
+     
+      
+
+
+
+      </style>
+</head>
+<body>
+    <!--
+1)creation of list using div<ul><li></li></ul>
+2)under list create sub menu 
+Traffic Building,ULY-1,ULY-3,ULY-4,ULY-6,Weighting Bridge and Weighting Bridge 2
+
+    -->
+    <!--hook out  deletion  hook in to generate work order  -->
+    <marquee>
+      <p>
+        Namaste
+      </p>
+    </marquee>
+
+    <div class="x234" style="display:flex;">
+   <h1>YARD MANAGEMENT SYSTEM</h1>
+   {{k12}}
+   <i class="fa  fa-user-circle" style="margin-left:40%;margin-top: 6px;font-size:24px;" onclick="gk()"></i> 
+
+  </div>
+  <div id="over" onclick="cl()"
+  style="display: none;
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.5);
+         z-index: 999;"></div>
+  <div class="xq" id="pp" style="display: none;">
+      <div class="x1q">
+      <i class="fa  fa-user-circle" style="margin-left:40%;margin-top: 6px;font-size:36px;"></i> 
+      <div class="k3q">{{kl.nam}} <br><div class="k312q" style=" font-size:14px;">{{kl.gr}}</div><div class="k31" style="text-align:left; font-size:12px;">Last-login:{{k12}}</div></div>
+          <div class="k1q" id="user">Settings</div>
+          <div class="k1q" id="shortcuts">Shortcuts</div>
+          <div class="k1q" id="weight">Change Password</div>
+          <div class="k1q"><a href="{% url 'logout'%}" style="color:red;text-decoration: none;">Log out</a></div>
+      </div>
+      <div class="x2q" id="contenta"></div>
+      <script>
+        // JavaScript to handle content updates based on clicked element
+        const contentDiv = document.getElementById('contenta');
+    
+        // Function to update x2 content based on clicked element
+        function updateContent(id) {
+            switch (id) {
+                case 'user':
+                    contentDiv.innerHTML = '<h1>Hello World</h1>';
+                    break;
+                case 'shortcuts':
+                    contentDiv.innerHTML = `<div class="container">
+    <p style="display: inline; margin-right: 5px;">ctrl+M</p>
+    <div class="qw12" style="display: inline; margin-left: 100px;">Map</div>
+    <br>
+    <br>
+    <p style="display: inline; margin-right: 5px;">ctrl+M</p>
+    <div class="qw12" style="display: inline; margin-left: 100px;">Map</div>
+</div>
+`;
+                    break;
+                case 'weight':
+                    contentDiv.innerHTML = `  <form id="myForm" style="margin-top: 20px;">
+        <label for="input1">New Password:</label>
+        <input type="password" id="input1" name="New Password" placeholder="Enter value 1" style="margin-bottom: 10px;"><br>
+        
+        <label for="input2">Confirm password:</label>
+        <input type="password" id="input2" name="input2" placeholder="Enter value 2" style="margin-bottom: 10px;"><br>
+        
+      
+        
+        <button type="button" onclick="handleConfirm()" style="background-color: #007bff; color: #ffffff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Confirm</button>
+    </form>
+ 
+
+
+
+    
+`
+                    break;
+                case 'about':
+                    contentDiv.innerHTML = '<p>About content goes here...</p>';
+                    break;
+                default:
+                    contentDiv.innerHTML = 'Select an option from the menu...';
+            }
+        }
+        function handleConfirm() {
+    // Retrieve values from password input fields
+    const newPassword = document.getElementById('input1').value;
+    const confirmPassword = document.getElementById('input2').value;
+
+    // Check if passwords match
+    if (newPassword !== confirmPassword) {
+        // Display SweetAlert error message for password mismatch
+        Swal.fire({
+            title: 'Password Mismatch',
+            text: 'The entered passwords do not match. Please try again.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+        return; // Exit function early if passwords do not match
+    }
+    const formData = new FormData();
+    formData.append('new_password', newPassword);
+
+    // Send POST request to Django view to change password
+    fetch('changepassword', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}'  // Include CSRF token for CSRF protection
+        }
+    })
+    // Display SweetAlert confirmation dialog if passwords match
+    
+    Swal.fire({
+        title: 'Confirm Password Change',
+        html: `You are about to change your password to:<br><strong>${newPassword}</strong>`,
+        icon: 'info',
+        showCancelButton: true,
+        confirmButtonText: 'Confirm',
+        cancelButtonText: 'Cancel',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Perform further actions if confirmed (e.g., submit form data)
+            Swal.fire('Success!', 'Password Changed', 'success');
+                    // Reload the page or update UI as needed
+                    setTimeout(function() {
+                        window.location.href = 'changepassword';
+                    }, 1000);
+        } 
+    });
+}
+        // Event listener to handle clicks on .k1 elements
+        const k1Elements = document.querySelectorAll('.k1q');
+        k1Elements.forEach(element => {
+            element.addEventListener('click', () => {
+                updateContent(element.id);
+            });
+        });
+    </script>
+  
+</div>
+
+<script>
+    // Function to display the modal and overlay
+    
+    function gk() {
+        document.getElementById("over").style.display = "block";
+        document.getElementById("pp").style.display = "block";
+    }
+
+    // Function to close the modal and overlay
+    function cl() {
+        var overlay = document.getElementById("over");
+        var modal = document.getElementById("pp");
+
+        // Check if the clicked element is the overlay itself
+        if (event.target === overlay) {
+            modal.style.display = "none";
+            overlay.style.display = "none";
+        }
+    }
+</script>
+    <div class="menu-bar">
+    <ul>
+       
+        <li><a href="#">Yard Map</a>
+        <div class="sub-menu">
+            <ul>
+               <li class="hover-me"><a href="{% url 'map' %}">Yard Map 2D</a>
+                <div class="sub-menu-2">
+                    <ul>
+                    <li><a href="#">CSPY East Block</a></li>
+                    <li><a href="#">CSPY West Block</a></li>
+                    <li><a href="#">Consignment</a></li>
+                    <li><a href="#">Kiosk</a></li>
+                    <li><a href="#">Kiosk-2</a></li>
+                    <li><a href="#">LY-1</a></li>
+                    <li><a href="#">LY-2</a></li>
+                    <li><a href="#">LY-3</a></li>
+                    <li><a href="#">LY-4</a></li>
+                    <li><a href="#">Parking</a></li>
+                    <li><a href="#">Reprocessing</a></li>
+                    <li><a href="#">Consignment</a></li>
+          
+                    <li><a href="#">ULY-1</a></li>
+                    <li><a href="#">ULY-3</a></li>
+                    <li><a href="#">ULY-4</a></li>
+                    <li><a href="#">ULY-6</a></li>
+                    <li><a href="#">Weighting Bridge</a></li>
+                    <li><a href="#">Weighting Bridge-2</a></li>
+              </ul>
+                </div>
+            
+            
+            
+            
+            
+            </li>
+            </ul>
+            </div></li>
+        <li><a href="#">Monitors</a>
+            <div class="sub-menu">
+                <ul>
+                    <li><a href="#">Yard Monitor</a>
+                        
+                 </li>
+            <li><a href="{% url 'rok' %}">Rake Monitor</a>
+           
+        </li>
+        <li><a href="{% url 'hok' %}">Hook Monitor</a></li>
+        <li><a href="{% url 'dash' %}">DashBoard </a></li>
+    </ul>
+    </div>  
+       </li>
+        <li class="hover-me"><a href="#">Rake Management</a>
+        <div class="sub-menu">
+          <ul>
+            <li><a href="{% url 'home' %}">Hooks</a></li>
+            <li><a href="{% url 'rake' %}">Rakes</a></li>
+            <li><a href="{% url 'wagontype'%}">Wagon Type Configuration</a></li>
+            <li><a href="{% url 'prerake' %}">Pre Rake Out Verification</a></li>
+          </ul>
+        </div>
+        </li>
+        <li class="hover-me"><a href="#">Truck Manager</a>
+        <div class="sub-menu">
+<ul>
+<li><a href="{% url 'inb' %}">Inbound Trucks</a></li>
+<li><a href="{% url 'dis' %}">Dispatch Trucks</a></li>
+<li><a href="#">Dispatch by Rake</a></li>
+
+</ul>
+
+
+        </div>
+        
+        
+        </li>
+        <li><a href="#">Workorders</a>
+            <div class="sub-menu">
+                <ul>
+                   <li class="hover-me"><a href="#">WorkOrder Index</a>
+                   
+                    <div class="sub-menu-2">
+                        <ul>
+                        <li><a href="{% url 'inboundorder' %}">Inbound via Hook</a></li>
+                        <li><a href="{% url 'inb' %}">Inbound via Truck</a></li>
+                        
+                        <li><a href="{% url 'materialp' %}">MaterialProcessing</a></li>
+                      
+                        <li><a href="#">Rake Dispatch</a></li>
+                        <li><a href="#">Rake Outbound</a></li>
+                        <li><a href="#">DirectDispatchbyRake</a></li>
+                        <li><a href="{% url 'dis' %}">Truck Dispatch</a></li>
+                        <li><a href="#">Truck Outbound</a></li>
+                        <li><a href="#">DirectDispatchbyTruck</a></li>
+                       
+                        <li><a href="{% url 'ord' %}">CurrentWorkorders</a></li>
+                        <li><a href="#">FinishedWorkorders</a></li>
+                        <li><a href="#">CancelledWorkorders</a></li>
+                        
+                  </ul>
+                    </div>
+          
+                </li>
+                </ul>
+               
+                    <ul>
+
+                       <li class="hover-me"><a href="#">WorkOrder Manager</a>
+                        <div class="sub-menu-2">
+                          <ul>
+                          <li><a href="#">Hook Unload</a></li>
+                          <li><a href="#">Rake Dispatch</a></li>
+                        
+                        </ul>
+                        </div>
+                       </li>
+                    </ul>              
+                                </div>
+        </li>
+        <li><a href="#">Search</a></li>
+        <li class="hover-me"><a href="#">Manual Updates</a>
+          <div class="sub-menu">
+            <ul>
+              <li><a href="#">Inventory</a></li>
+            
+           
+              <li><a href="{% url 'mp' %}">Material Processing</a></li>
+           
+            </ul>
+          </div>
+          </li>
+        <li><a href="#">Reports</a>
+        <div class="sub-menu">
+            <ul>
+               <li class="hover-me"><a href="#">Miscellenous</a>
+              <div class="sub-menu-2">
+           
+                    <ul>
+                    <li><a href="{% url 'dispatchtruck' %}">dispatch truck history</a></li>
+                    <li><a href="#">rake plan received</a></li>
+                    <li><a href="{% url 'fnote'%}">f-note report history</a></li>
+                    <li><a href="#">pre rake out</a></li>
+                    <li><a href="{% url 'prerakeverificationsearch' %}">pre rake out verification</a></li>
+                    <li><a href="{% url 'rakechallan' %}">rakes challan gross weightment report</a></li>
+                    <li><a href="{% url 'mps' %}">material processing report</a></li>
+                    <li><a href="{% url 'indent' %}">indent dispatched  through yms</a></li>
+                    <li><a href="#">pre raked out vsloaded</a></li>
+                    <li><a href="#">dispatch rake verification</a></li>
+                    <li><a href="{% url 'hold' %}">hold wagon history report </a></li>
+            
+              </ul>
+                </div>
+              
+              
+              
+              </li>
+            </ul>
+          
+                 <ul>
+                   <li class="hover-me"><a href="#">Work Orders</a>
+                    <div class="sub-menu-2">
+           
+                      <ul>
+                      <li><a href="{% url 'hooksearch'%}">hook workorders</a></li>
+                      <li><a href="{% url 'rakesearch'%}">rake plan workorders</a></li>
+                      <li><a href="{% url 'finordersearch'%}">finished workorders</a></li>
+                      <li><a href="{% url 'findetail' %}">finished workorders detail</a></li>
+                      <li><a href="{% url 'cancelsearch'%}">cancelled workorders</a></li>
+                    
+              
+                </ul>
+                  </div>
+                  
+                  
+                  
+                  
+                  
+                  </li>
+                </ul>
+              
+                    <ul>
+                       <li class="hover-me"><a href="#">Interface Reports</a>
+                        <div class="sub-menu-2">
+           
+                          <ul>
+                          <li><a href="#">hook recieved history</a></li>
+                          <li><a href="{% url 'captive' %}">captive truck received history</a></li>
+                          <li><a href="#">rake plan received history</a></li>
+                          <li><a href="#">truck plan received history</a></li>
+                          <li><a href="#">rake dispatch history report</a></li>
+                          <li><a href="#">rake dispatch material report history</a></li>
+                       
+                       
+                          
+                       
+                  
+                    </ul>
+                      </div>
+                      
+                      
+                      
+                      
+                      </li>
+                    </ul>
+                  
+                        <ul>
+                           <li class="hover-me"><a href="#">Yard Reports</a>
+                            <div class="sub-menu-2">
+                            <ul>
+                              <li><a href="{% url 'locationhistory' %}">location history</a></li>
+                              <li><a href="{%  url 'layersearch' %}">layer wise report</a></li>
+                             
+                         
+                              <li><a href="#">material code wise bins report </a></li>
+                             
+                            
+                      
+                        </ul>
+                      </div>
+                      </li>
+                        </ul>
+                       
+                            
+                            </div>
+                        </li>
+        <li><a href="#">Configuration</a>
+            <div class="sub-menu">
+                <ul>
+                   <li><a href="{% url 'sy' %}">Sync Material Weight</a></li>
+                </ul>
+                
+                
+                    <ul>
+                       <li><a href="{% url 'dev' %}">Update Device Information</a></li>
+                    </ul>
+                   
+                    
+                        <ul>
+                           <li><a href="{% url 'mat' %}">Material Management</a></li>
+                        </ul>
+                      
+                        
+                            <ul>
+                               <li><a href="{% url 'bin' %}">Bin Configuration</a></li>
+                            </ul>
+                          
+                            
+                                <ul>
+                                   <li><a href="{% url 'gp' %}">GPS Configuration</a></li>
+                                </ul>
+                               
+                                    
+                                 
+                                    
+                                       
+                                        
+                                       
+                                            <ul>
+                                               <li><a href="{% url 'usr' %}">User Configuration</a></li>
+                                            </ul>
+                                        
+                                         
+                                                <ul>
+                                                   <li><button onclick="togglePopup()" style="background-color: rgb(0,100,0); color:white; border:0;font-size:12px;font-family: 'Times New Roman', Times, serif;">Update Authority</button></li>
+                                                </ul>
+                                              
+                                                    
+                                                    
+                                                        <ul>
+                                                           <li><a href="{% url 'veh' %}">User Defined Vehicle Name</a></li>
+                                                        </ul>
+                                                        </div>
+        </li>
+    </ul>
+</div>
+
+
+
+
+
+<div class="over" id="over" onclick="clse()"></div>
+<div class="pp" id="pp">
+  <h2>Form</h2>
+  <form>
+      <label for="name">Name:</label><br>
+      <input type="text" id="name" name="name" required><br>
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email" required><br><br>
+      <button type="submit">Submit</button>
+  </form>
+</div>
+<script>
+  // Function to open the pop-up
+  function wg() {
+      document.getElementById("pp").style.display = "block";
+      document.getElementById("over").style.display = "block";
+  }
+
+  // Function to close the pop-up
+  function clse() {
+      document.getElementById("pp").style.display = "none";
+      document.getElementById("over").style.display = "none";
+  }
+</script>
+
+<br>
+<div class="ert" style="position:absolute;left:40%;">
+<h4 >Configure IR Wagons</h4>
+<a onclick="tog()" style="text-decoration:none;background-color: black; color:white;padding:5px 5px;position:relative;top:10px;">Add New IR Wagon Type</a>
+</div>
+<div id="popi" class="pop">
+  <!-- Popup content -->
+  
+  <div class="form-container">
+    
+    <span class="close" onclick="tog()" style=" font-size:28px; position:relative;left:-10%;" >&times;</span>
+    <form id="materialForm">
+        <div class="form-group">
+            <label for="wagontype">WAGON TYPE</label>
+            <input type="text" id="wagontype" name="wagontype">
+        </div>
+        <div class="form-group">
+            <label for="Destination">DESTINATION</label>
+            <input type="text" id="destination" name="destination">
+        </div>
+        <div class="form-group">
+            <label for="minu">MIN CHARGEABLE WEIGHT</label>
+            <input type="number" id="minu" name="minu" min="0">
+        </div>
+        <div class="form-group">
+            <label for="maxu">MAX CHAREGABLE WEIGHT</label>
+            <input type="number" id="maxu" name="maxu" min="0">
+        </div>
+        <div class="form-group">
+            <label for="tare">TARE WEIGHT</label>
+            <input type="number" id="tar" name="tar" min="0">
+        </div>
+        <div class="form-group">
+          <label for="valid">VALID DATE</label>
+          <input type="datetime-local" id="dat" name="dat">
+      </div>
+       
+       
+        <button type="submit" class="submit-button">Submit</button>
+    </form>
+</div>
+
+
+    
+  </div>
+  <script>
+    function tog() {
+          var popup = document.getElementById('popi');
+          if (popup.style.display === "block") {
+            popup.style.display = "none";
+          } else {
+            popup.style.display = "block";
+          }
+        }
+  
+  
+  </script> 
+<table style="margin-top:60px;">
+    <tr>
+      <th>Id</th>
+      <th>Wagon Type</th>
+      <th>Destination Code</th>
+      <th>Min chargeable Weight(ton)</th>
+      <th>Max chargeable Weight(ton)</th>
+      <th>Tare Weight(ton)</th>
+      <th>Valid Date</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+
+
+</html>

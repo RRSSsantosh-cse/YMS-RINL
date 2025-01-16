@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: gray;
+        }
+        .container {
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            background-color: white;
+            height: 60%;
+            width: 70%;
+            padding: 20px; /* Added padding for better styling */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h4 style="margin: 15px; text-align: center; background-color: gray;">Hook Workorders</h4>
+        <form method="post" action="{% url 'hooksearchresults' %}" style="margin-top: 30px;">
+            {% csrf_token %}
+            <label for="hook_no">Hook No:</label>
+            <select name="hook_no_operator" id="hook_no_operator">
+                <option value="Equal To">Equal To</option>
+                <option value="Like">Like</option>
+            </select>
+            <input type="text" name="hook_no_value" required><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
